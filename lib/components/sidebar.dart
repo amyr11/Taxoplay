@@ -11,6 +11,7 @@ class SideBar extends StatelessWidget {
     return Drawer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SafeArea(
             child: SizedBox(
