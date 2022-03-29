@@ -28,7 +28,7 @@ ThemeData kDarkTheme = ThemeData(
         const Size(180, 60),
       ),
       padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-        const EdgeInsets.symmetric(horizontal: 40.0, vertical: 17.0),
+        const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
