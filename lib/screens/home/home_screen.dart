@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../components/sidebar.dart';
+import '../../components/sidebar.dart';
 
 class HomeScreen extends StatelessWidget {
   final int id;

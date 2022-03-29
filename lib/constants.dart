@@ -7,6 +7,7 @@ Color kButtonColor = const Color.fromARGB(255, 13, 19, 52);
 
 ThemeData kDarkTheme = ThemeData(
   brightness: Brightness.dark,
+  fontFamily: 'Roboto',
   canvasColor: kPrimaryColor,
   appBarTheme: AppBarTheme(
     backgroundColor: kPrimaryColor,
