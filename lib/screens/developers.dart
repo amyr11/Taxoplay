@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../components/sidebar.dart';
 
 class DevelopersScreen extends StatelessWidget {
-  const DevelopersScreen({Key? key}) : super(key: key);
+  final int id;
+  const DevelopersScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class DevelopersScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Developers"),
       ),
-      drawer: const SideBar(),
+      drawer: SideBar(highlighted: id),
     );
   }
 }

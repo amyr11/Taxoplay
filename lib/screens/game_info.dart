@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../components/sidebar.dart';
 
 class GameInfoScreen extends StatelessWidget {
-  const GameInfoScreen({Key? key}) : super(key: key);
+  final int id;
+  const GameInfoScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class GameInfoScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Game Info"),
       ),
-      drawer: const SideBar(),
+      drawer: SideBar(highlighted: id),
     );
   }
 }

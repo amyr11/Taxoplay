@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Taxoplay',
       theme: kDarkTheme,
       // theme: ThemeData(brightness: Brightness.light),
-      home: HomeScreen(),
+      home: const HomeScreen(id: 0),
     );
   }
 }

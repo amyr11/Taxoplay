@@ -7,21 +7,16 @@ import 'package:taxoplay/screens/game_instruction.dart';
 import '../screens/home_screen.dart';
 
 class Screen {
-  final String name;
-  final Widget screen;
-  final bool selected = false;
+  String name;
+  Widget screen;
 
   Screen(this.name, this.screen);
-
-  set selected(bool isSelected) {
-    selected = isSelected;
-  }
 }
 
 List<Screen> screens = [
-  Screen('Home', const HomeScreen()),
-  Screen('Stats', const StatsSceen()),
-  Screen('Game Info', const GameInfoScreen()),
-  Screen('Game Instruction', const GameInstructionScreen()),
-  Screen('Developers', const DevelopersScreen()),
+  Screen('Home', const HomeScreen(id: 0)),
+  Screen('Stats', const StatsSceen(id: 1)),
+  Screen('Game Info', const GameInfoScreen(id: 2)),
+  Screen('Game Instruction', const GameInstructionScreen(id: 3)),
+  Screen('Developers', const DevelopersScreen(id: 4)),
 ];
