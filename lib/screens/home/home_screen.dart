@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
+import 'package:taxoplay/screens/categories.dart';
 
 import '../../components/sidebar.dart';
 
@@ -25,7 +26,14 @@ class HomeScreen extends StatelessWidget {
             ),
             vSpace(kDefaultSpace),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CategoriesScreen(),
+                  ),
+                );
+              },
               child: const Text(
                 'Start',
                 style: TextStyle(
