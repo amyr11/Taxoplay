@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:taxoplay/constants.dart';
+import 'package:taxoplay/helpers/empty_space.dart';
 
 import '../../components/sidebar.dart';
 
@@ -13,12 +15,28 @@ class HomeScreen extends StatelessWidget {
         title: const Text("Home"),
       ),
       drawer: SideBar(highlighted: id),
-      body: Column(
-        children: const [
-          Image(
-            image: AssetImage('assets/logo/logo.png'),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Image(
+              width: 250,
+              image: AssetImage('assets/logo/logo.png'),
+            ),
+            vSpace(kDefaultSpace),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text(
+                'Start',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            vSpace(kDefaultSpace),
+          ],
+        ),
       ),
     );
   }
