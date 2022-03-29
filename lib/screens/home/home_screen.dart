@@ -13,6 +13,13 @@ class HomeScreen extends StatelessWidget {
         title: const Text("Home"),
       ),
       drawer: SideBar(highlighted: id),
+      body: Column(
+        children: const [
+          Image(
+            image: AssetImage('assets/logo/logo.png'),
+          ),
+        ],
+      ),
     );
   }
 }
