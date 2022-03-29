@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:taxoplay/constants.dart';
 
+import '../models/screen.dart';
+
 class SideBar extends StatelessWidget {
   const SideBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SafeArea(
             child: SizedBox(
@@ -21,49 +23,29 @@ class SideBar extends StatelessWidget {
               ),
             ),
           ),
-          buildListTile(context),
-          ListTile(
-            title: const Text('Stats'),
-            onTap: () {
-              //...
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Game Info'),
-            onTap: () {
-              //...
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Game Instruction'),
-            onTap: () {
-              //...
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Developers'),
-            onTap: () {
-              //...
-              Navigator.pop(context);
-            },
+          Expanded(
+            child: ListView.builder(
+              itemCount: screens.length,
+              itemBuilder: (context, index) =>
+                  buildListTile(context, screens[index]),
+            ),
           ),
         ],
       ),
     );
   }
 
-  ListTile buildListTile(BuildContext context) {
+  ListTile buildListTile(BuildContext context, Screen screen) {
     return ListTile(
       selectedColor: kSecondaryColor,
       selectedTileColor: Colors.white.withAlpha(20),
-      selected: true,
-      title: const Text('Home'),
+      selected: screen.selected,
+      title: Text(screen.name),
       onTap: () {
-        //...
-        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => screen.screen),
+        );
       },
     );
   }
