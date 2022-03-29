@@ -7,7 +7,15 @@ Color kButtonColor = const Color.fromARGB(255, 13, 19, 52);
 
 ThemeData kDarkTheme = ThemeData(
   brightness: Brightness.dark,
-  primaryColor: kPrimaryColor,
+  canvasColor: kPrimaryColor,
+  appBarTheme: AppBarTheme(
+    backgroundColor: kPrimaryColor,
+    centerTitle: false,
+  ),
+  colorScheme: const ColorScheme.dark().copyWith(
+    primary: kPrimaryColor,
+    secondary: kSecondaryColor,
+  ),
   scaffoldBackgroundColor: kBackgroundColor,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
