@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
+import 'package:taxoplay/screens/prize.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
@@ -10,7 +11,6 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(),
         title: const Text("Categories"),
       ),
       body: Center(
@@ -30,11 +30,25 @@ class CategoriesScreen extends StatelessWidget {
               ),
             ),
             vSpace(kDefaultSpace),
-            buildCatButton('History of Taxonomy'),
+            buildCatButton(
+              'History of Taxonomy',
+              context,
+              PrizeScreen(category: histTaxonomy),
+            ),
             vSpace(kDefaultSpace / 2),
-            buildCatButton('Genetics'),
+            // buildCatButton('Genetics'),
+            buildCatButton(
+              'History of Taxonomy',
+              context,
+              PrizeScreen(category: histTaxonomy),
+            ),
             vSpace(kDefaultSpace / 2),
-            buildCatButton('Classification'),
+            // buildCatButton('Classification'),
+            buildCatButton(
+              'History of Taxonomy',
+              context,
+              PrizeScreen(category: histTaxonomy),
+            ),
             vSpace(kDefaultSpace),
           ],
         ),
@@ -42,9 +56,17 @@ class CategoriesScreen extends StatelessWidget {
     );
   }
 
-  ElevatedButton buildCatButton(String text) {
+  ElevatedButton buildCatButton(
+      String text, BuildContext context, Widget destination) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: ((context) => destination),
+          ),
+        );
+      },
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all<Size>(
           const Size(330, 60),
