@@ -1,26 +1,17 @@
 class Category {
-  final String name;
-  final List<Question> easy;
-  final List<Question> average;
-  final List<Question> difficult;
-
-  Category(this.name, this.easy, this.average, this.difficult);
+  Category(String name, List<Question> easy, List<Question> average,
+      List<Question> difficult);
 }
 
 abstract class Question {
-  final int price;
-  final String question;
-  final String answer;
-
-  Question(this.price, this.question, this.answer);
+  Question(int price, String question, String answer);
 
   bool isCorrect(String answer);
   void goToScreen();
 }
 
 class PuzzleQuestion extends Question {
-  final List<int> hints;
-  PuzzleQuestion(int price, String question, String answer, this.hints)
+  PuzzleQuestion(int price, String question, String answer, List<int> hints)
       : super(price, question, answer);
 
   @override
@@ -36,10 +27,8 @@ class PuzzleQuestion extends Question {
 }
 
 class MultipleChoiceQuestion extends Question {
-  final List<String> wrongAnswers;
-
   MultipleChoiceQuestion(
-      int price, String question, String answer, this.wrongAnswers)
+      int price, String question, String answer, List<String> wrongAnswers)
       : super(price, question, answer);
 
   @override
