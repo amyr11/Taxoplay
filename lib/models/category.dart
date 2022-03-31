@@ -4,6 +4,7 @@ class Category {
 }
 
 abstract class Question {
+  final bool isAnswered = false;
   Question(int price, String question, String answer);
 
   bool isCorrect(String answer);
