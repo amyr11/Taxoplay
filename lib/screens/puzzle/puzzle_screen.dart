@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:taxoplay/components/buttons.dart';
+import 'package:taxoplay/models/category.dart';
 
 class PuzzleScreen extends StatefulWidget {
-  const PuzzleScreen({Key? key}) : super(key: key);
+  final Question question;
+
+  const PuzzleScreen({Key? key, required this.question}) : super(key: key);
 
   @override
   State<PuzzleScreen> createState() => _PuzzleScreenState();
@@ -10,6 +14,13 @@ class PuzzleScreen extends StatefulWidget {
 class _PuzzleScreenState extends State<PuzzleScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: DefaultButton(
+        onPressed: () {
+          Navigator.pop(context, true);
+        },
+        text: 'Back',
+      ),
+    );
   }
 }

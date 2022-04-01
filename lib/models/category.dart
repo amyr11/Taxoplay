@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:taxoplay/screens/puzzle/puzzle_screen.dart';
+
 class Category {
   final String name;
   final List<Question> easy;
@@ -11,11 +14,17 @@ abstract class Question {
   final int price;
   final String question;
   final String answer;
-  final bool isAnswered = false;
+  bool isAnswered = false;
+  bool isCorrect = false;
 
   Question(this.price, this.question, this.answer);
 
-  void goToScreen();
+  Widget getScreen();
+
+  void setAnswered(bool isCorrect) {
+    isAnswered = true;
+    this.isCorrect = isCorrect;
+  }
 }
 
 class PuzzleQuestion extends Question {
@@ -24,8 +33,10 @@ class PuzzleQuestion extends Question {
       : super(price, question, answer);
 
   @override
-  void goToScreen() {
-    // TODO: implement goToScreen
+  Widget getScreen() {
+    return PuzzleScreen(
+      question: this,
+    );
   }
 }
 
@@ -37,8 +48,8 @@ class MultipleChoiceQuestion extends Question {
       : super(price, question, answer);
 
   @override
-  void goToScreen() {
-    // TODO: implement goToScreen
+  Widget getScreen() {
+    throw "Not implemented getSreen()";
   }
 }
 

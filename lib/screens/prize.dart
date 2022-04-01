@@ -140,6 +140,24 @@ class PrizeCard extends StatefulWidget {
 }
 
 class _PrizeCardState extends State<PrizeCard> {
+  void updateQuestion(bool isCorrect) {
+    setState(() {
+      widget.question.setAnswered(isCorrect);
+    });
+  }
+
+  Color getColor() {
+    if (widget.question.isAnswered) {
+      if (widget.question.isCorrect) {
+        return Colors.green;
+      } else {
+        return Colors.red;
+      }
+    } else {
+      return Colors.transparent;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -148,12 +166,18 @@ class _PrizeCardState extends State<PrizeCard> {
         vertical: 7,
       ),
       child: InkWell(
-        onTap: () {
-          widget.question.goToScreen();
+        onTap: () async {
+          // widget.question.getScreen();
+          final isCorrect = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => widget.question.getScreen())));
+          updateQuestion(isCorrect);
         },
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
+            color: getColor(),
             border: Border.all(
               width: 2,
               color: kPrimaryLightColor,
