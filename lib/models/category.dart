@@ -15,7 +15,6 @@ abstract class Question {
 
   Question(this.price, this.question, this.answer);
 
-  bool isCorrect(String answer);
   void goToScreen();
 }
 
@@ -27,12 +26,6 @@ class PuzzleQuestion extends Question {
   @override
   void goToScreen() {
     // TODO: implement goToScreen
-  }
-
-  @override
-  bool isCorrect(String answer) {
-    // TODO: implement isCorrect
-    throw UnimplementedError();
   }
 }
 
@@ -46,12 +39,6 @@ class MultipleChoiceQuestion extends Question {
   @override
   void goToScreen() {
     // TODO: implement goToScreen
-  }
-
-  @override
-  bool isCorrect(String answer) {
-    // TODO: implement isCorrect
-    throw UnimplementedError();
   }
 }
 
