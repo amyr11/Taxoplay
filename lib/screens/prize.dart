@@ -149,9 +149,9 @@ class _PrizeCardState extends State<PrizeCard> {
   Color getColor() {
     if (widget.question.isAnswered) {
       if (widget.question.isCorrect) {
-        return Colors.green;
+        return kDarkGreenColor;
       } else {
-        return Colors.red;
+        return kDarkRedColor;
       }
     } else {
       return Colors.transparent;
