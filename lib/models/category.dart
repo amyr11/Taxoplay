@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taxoplay/screens/multiple_question/multiple_question_screen.dart';
 import 'package:taxoplay/screens/puzzle/puzzle_screen.dart';
 
 class Category {
@@ -34,9 +35,7 @@ class PuzzleQuestion extends Question {
 
   @override
   Widget getScreen() {
-    return PuzzleScreen(
-      question: this,
-    );
+    return PuzzleScreen(question: this);
   }
 }
 
@@ -49,7 +48,7 @@ class MultipleChoiceQuestion extends Question {
 
   @override
   Widget getScreen() {
-    throw "Not implemented getSreen()";
+    return MultipleQuestionScreen(question: this);
   }
 }
 
