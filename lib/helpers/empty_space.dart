@@ -5,3 +5,9 @@ Widget vSpace(double height) {
     height: height,
   );
 }
+
+Widget hSpace(double width) {
+  return SizedBox(
+    width: width,
+  );
+}

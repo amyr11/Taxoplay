@@ -3,6 +3,7 @@ import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/screens/categories.dart';
 
+import '../../components/buttons.dart';
 import '../../components/sidebar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,7 +26,7 @@ class HomeScreen extends StatelessWidget {
               image: AssetImage('assets/logo/logo.png'),
             ),
             vSpace(kDefaultSpace),
-            ElevatedButton(
+            DefaultButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -34,13 +35,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text(
-                'Start',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              text: 'Start',
             ),
             vSpace(kDefaultSpace),
           ],
