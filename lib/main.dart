@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taxoplay/constants.dart';
-import 'package:taxoplay/screens/home/home_screen.dart';
+import 'package:taxoplay/screens/home_screen.dart';
 
 void main() {
   runApp(MyApp());

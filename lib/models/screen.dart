@@ -4,7 +4,7 @@ import 'package:taxoplay/screens/developers.dart';
 import 'package:taxoplay/screens/game_info.dart';
 import 'package:taxoplay/screens/game_instruction.dart';
 
-import '../screens/home/home_screen.dart';
+import '../screens/home_screen.dart';
 
 class Screen {
   String name;

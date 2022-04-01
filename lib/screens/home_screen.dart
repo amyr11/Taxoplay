@@ -3,8 +3,8 @@ import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/screens/categories.dart';
 
-import '../../components/buttons.dart';
-import '../../components/sidebar.dart';
+import '../components/buttons.dart';
+import '../components/sidebar.dart';
 
 class HomeScreen extends StatelessWidget {
   final int id;
