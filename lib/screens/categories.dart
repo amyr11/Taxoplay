@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
-import 'package:taxoplay/screens/prize_screens/classification.dart';
-import 'package:taxoplay/screens/prize_screens/genetics.dart';
 import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -41,14 +39,14 @@ class CategoriesScreen extends StatelessWidget {
             buildCatButton(
               'Genetics',
               context,
-              const GeneticsScreen(),
+              const HistTaxonomyScreen(),
             ),
             vSpace(kDefaultSpace / 2),
             // buildCatButton('Classification'),
             buildCatButton(
               'Classification',
               context,
-              const ClassificationScreen(),
+              const HistTaxonomyScreen(),
             ),
             vSpace(kDefaultSpace),
           ],

@@ -20,7 +20,7 @@ abstract class Question {
 
   Question(this.price, this.question, this.answer);
 
-  Widget getScreen();
+  Widget getScreen(String categoryName);
 
   void setAnswered(bool isCorrect) {
     isAnswered = true;
@@ -34,8 +34,8 @@ class PuzzleQuestion extends Question {
       : super(price, question, answer);
 
   @override
-  Widget getScreen() {
-    return PuzzleScreen(question: this);
+  Widget getScreen(String categoryName) {
+    return PuzzleScreen(categoryName: categoryName, question: this);
   }
 }
 
@@ -47,8 +47,8 @@ class MultipleChoiceQuestion extends Question {
       : super(price, question, answer);
 
   @override
-  Widget getScreen() {
-    return MultipleQuestionScreen(question: this);
+  Widget getScreen(String categoryName) {
+    return MultipleQuestionScreen(categoryName: categoryName, question: this);
   }
 }
 

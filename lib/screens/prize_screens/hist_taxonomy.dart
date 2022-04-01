@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/constants.dart';
-import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
+
+const String categoryName = 'History of Taxonomy';
 
 class HistTaxonomyScreen extends StatefulWidget {
   const HistTaxonomyScreen({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class HistTaxonomyScreen extends StatefulWidget {
 
 class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
   final Category category = Category(
-    'History of Taxonomy',
+    categoryName,
     [
       PuzzleQuestion(
         100,
@@ -263,7 +264,8 @@ class _PrizeCardState extends State<PrizeCard> {
           final isCorrect = await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: ((context) => widget.question.getScreen())));
+                  builder: ((context) =>
+                      widget.question.getScreen(categoryName))));
           updateQuestion(isCorrect);
         },
         child: Container(
