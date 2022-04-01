@@ -4,15 +4,104 @@ import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
 
-class PrizeScreen extends StatefulWidget {
-  final Category category;
-  const PrizeScreen({Key? key, required this.category}) : super(key: key);
+class HistTaxonomyScreen extends StatefulWidget {
+  const HistTaxonomyScreen({Key? key}) : super(key: key);
 
   @override
-  State<PrizeScreen> createState() => _PrizeScreenState();
+  State<HistTaxonomyScreen> createState() => _HistTaxonomyScreenState();
 }
 
-class _PrizeScreenState extends State<PrizeScreen> {
+class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
+  final Category category = Category(
+    'History of Taxonomy',
+    [
+      PuzzleQuestion(
+        100,
+        'Greek Philosopher who saw the hierarchy of organisms called the “Ladder of Nature',
+        'ARISTOTLE',
+        [2, 4, 8],
+      ),
+      PuzzleQuestion(
+        100,
+        'One of the three major domains',
+        'EUKARYA',
+        [0, 2, 6],
+      ),
+      PuzzleQuestion(
+        200,
+        'Animals with bony backbones',
+        'VERTEBRATES',
+        [0, 2, 6, 10],
+      ),
+      PuzzleQuestion(
+        200,
+        'Smallest category in the hierarchical classification of organisms',
+        'SPECIES',
+        [0, 1, 6],
+      ),
+    ],
+    [
+      MultipleChoiceQuestion(
+        300,
+        'The classification of five kingdoms is given by',
+        'RH Whittaker',
+        ['Margulis', 'Linnaeus', 'Theophrastus'],
+      ),
+      MultipleChoiceQuestion(
+        300,
+        'He was a Swedish botanist who lived in the 18th century that gave himself the huge task of creating a uniform system for naming all living organisms',
+        'Linnaeus',
+        ['Engler and Prantl', 'Bentham and Hooker', 'Margulis'],
+      ),
+      MultipleChoiceQuestion(
+        400,
+        'He published his book The Origin of Species in 1859',
+        'Charles Darwin',
+        ['Margulis', 'Mc Einstein', 'Aristotle'],
+      ),
+      MultipleChoiceQuestion(
+        400,
+        'A French marine biologist realized that all cells could be divided into two categories based on whether or not they had a nucleus',
+        'Edouard Chatton',
+        ['Wallace', 'Margulis', 'Aristotle'],
+      ),
+    ],
+    [
+      MultipleChoiceQuestion(
+        500,
+        'What do we call the naming system for the type of organisms that we still use until today?',
+        'Binomial system of nomenclature',
+        [
+          'Monomial system of nomenclature',
+          'Trinomial system of nomenclature',
+          'None of the above'
+        ],
+      ),
+      MultipleChoiceQuestion(
+        500,
+        'What are the two kinds of bacteria which Carl Woese had suggest?',
+        'True bacteria and Ancient bacteria',
+        [
+          'Old bacteria and dead bacteria',
+          'New bacteria and alive bacteria',
+          'True bacteria and dead bacteria'
+        ],
+      ),
+      PuzzleQuestion(
+        600,
+        'People who look for what one organism has in common with another and try to figure out the relationship between them',
+        'TAXONOMISTS',
+        [1, 4, 6, 9],
+      ),
+      PuzzleQuestion(
+        600,
+        'This category was not included in Linnaeus\' lineup',
+        'PHYLUM',
+        [0, 5],
+      ),
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +114,7 @@ class _PrizeScreenState extends State<PrizeScreen> {
             children: [
               // vSpace(kDefaultSpace),
               Text(
-                widget.category.name,
+                category.name,
                 style: TextStyle(
                   fontSize: 30,
                   color: kSecondaryColor,
@@ -53,30 +142,30 @@ class _PrizeScreenState extends State<PrizeScreen> {
                   Expanded(
                     child: Column(
                       children: [
-                        PrizeCard(question: widget.category.easy[0]),
-                        PrizeCard(question: widget.category.easy[1]),
-                        PrizeCard(question: widget.category.easy[2]),
-                        PrizeCard(question: widget.category.easy[3]),
+                        PrizeCard(question: category.easy[0]),
+                        PrizeCard(question: category.easy[1]),
+                        PrizeCard(question: category.easy[2]),
+                        PrizeCard(question: category.easy[3]),
                       ],
                     ),
                   ),
                   Expanded(
                     child: Column(
                       children: [
-                        PrizeCard(question: widget.category.average[0]),
-                        PrizeCard(question: widget.category.average[1]),
-                        PrizeCard(question: widget.category.average[2]),
-                        PrizeCard(question: widget.category.average[3]),
+                        PrizeCard(question: category.average[0]),
+                        PrizeCard(question: category.average[1]),
+                        PrizeCard(question: category.average[2]),
+                        PrizeCard(question: category.average[3]),
                       ],
                     ),
                   ),
                   Expanded(
                     child: Column(
                       children: [
-                        PrizeCard(question: widget.category.difficult[0]),
-                        PrizeCard(question: widget.category.difficult[1]),
-                        PrizeCard(question: widget.category.difficult[2]),
-                        PrizeCard(question: widget.category.difficult[3]),
+                        PrizeCard(question: category.difficult[0]),
+                        PrizeCard(question: category.difficult[1]),
+                        PrizeCard(question: category.difficult[2]),
+                        PrizeCard(question: category.difficult[3]),
                       ],
                     ),
                   ),
@@ -167,7 +256,7 @@ class _PrizeCardState extends State<PrizeCard> {
       ),
       child: InkWell(
         onTap: () async {
-          // widget.question.getScreen();
+          // question.getScreen();
           final isCorrect = await Navigator.push(
               context,
               MaterialPageRoute(
