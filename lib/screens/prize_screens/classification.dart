@@ -13,7 +13,7 @@ class ClassificationScreen extends StatefulWidget {
 
 class _ClassificationScreenState extends State<ClassificationScreen> {
   final Category category = Category(
-    'classification',
+    'Classification',
     [
       PuzzleQuestion(
         100,
