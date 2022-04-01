@@ -112,7 +112,6 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // vSpace(kDefaultSpace),
               Text(
                 category.name,
                 style: TextStyle(
@@ -121,59 +120,63 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              vSpace(kDefaultSpace),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Expanded(
-                    child: CategoryCard(category: 'Easy'),
-                  ),
-                  Expanded(
-                    child: CategoryCard(category: 'Average'),
-                  ),
-                  Expanded(
-                    child: CategoryCard(category: 'Difficult'),
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: kDefaultSpace / 2),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Expanded(
+                          child: CategoryCard(category: 'Easy'),
+                        ),
+                        Expanded(
+                          child: CategoryCard(category: 'Average'),
+                        ),
+                        Expanded(
+                          child: CategoryCard(category: 'Difficult'),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              PrizeCard(question: category.easy[0]),
+                              PrizeCard(question: category.easy[1]),
+                              PrizeCard(question: category.easy[2]),
+                              PrizeCard(question: category.easy[3]),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              PrizeCard(question: category.average[0]),
+                              PrizeCard(question: category.average[1]),
+                              PrizeCard(question: category.average[2]),
+                              PrizeCard(question: category.average[3]),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              PrizeCard(question: category.difficult[0]),
+                              PrizeCard(question: category.difficult[1]),
+                              PrizeCard(question: category.difficult[2]),
+                              PrizeCard(question: category.difficult[3]),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        PrizeCard(question: category.easy[0]),
-                        PrizeCard(question: category.easy[1]),
-                        PrizeCard(question: category.easy[2]),
-                        PrizeCard(question: category.easy[3]),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        PrizeCard(question: category.average[0]),
-                        PrizeCard(question: category.average[1]),
-                        PrizeCard(question: category.average[2]),
-                        PrizeCard(question: category.average[3]),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        PrizeCard(question: category.difficult[0]),
-                        PrizeCard(question: category.difficult[1]),
-                        PrizeCard(question: category.difficult[2]),
-                        PrizeCard(question: category.difficult[3]),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              vSpace(kDefaultSpace),
               DefaultButton(onPressed: () {}, text: 'Show Score'),
-              vSpace(kDefaultSpace),
             ],
           ),
         ),
