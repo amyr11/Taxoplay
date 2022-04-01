@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taxoplay/components/buttons.dart';
+import 'package:taxoplay/constants.dart';
+import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
 import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
 
@@ -27,7 +28,30 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
           Navigator.pop(context, true);
           return false;
         },
-        child: Column(),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '\$${widget.question.price}',
+                style: const TextStyle(fontSize: 34),
+              ),
+              vSpace(kDefaultSpace / 2),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: kDefaultSpace / 3),
+                child: Text(
+                  widget.question.question,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: kSecondaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

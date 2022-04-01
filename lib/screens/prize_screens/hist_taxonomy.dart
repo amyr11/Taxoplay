@@ -18,7 +18,7 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
     [
       PuzzleQuestion(
         100,
-        'Greek Philosopher who saw the hierarchy of organisms called the “Ladder of Nature',
+        'Greek Philosopher who saw the hierarchy of organisms called the “Ladder of Nature"',
         'ARISTOTLE',
         [2, 4, 8],
       ),
