@@ -4,10 +4,15 @@ import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
 
-class PrizeScreen extends StatelessWidget {
+class PrizeScreen extends StatefulWidget {
   final Category category;
   const PrizeScreen({Key? key, required this.category}) : super(key: key);
 
+  @override
+  State<PrizeScreen> createState() => _PrizeScreenState();
+}
+
+class _PrizeScreenState extends State<PrizeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +25,7 @@ class PrizeScreen extends StatelessWidget {
             children: [
               // vSpace(kDefaultSpace),
               Text(
-                category.name,
+                widget.category.name,
                 style: TextStyle(
                   fontSize: 30,
                   color: kSecondaryColor,
@@ -48,30 +53,30 @@ class PrizeScreen extends StatelessWidget {
                   Expanded(
                     child: Column(
                       children: [
-                        PrizeCard(question: category.easy[0]),
-                        PrizeCard(question: category.easy[1]),
-                        PrizeCard(question: category.easy[2]),
-                        PrizeCard(question: category.easy[3]),
+                        PrizeCard(question: widget.category.easy[0]),
+                        PrizeCard(question: widget.category.easy[1]),
+                        PrizeCard(question: widget.category.easy[2]),
+                        PrizeCard(question: widget.category.easy[3]),
                       ],
                     ),
                   ),
                   Expanded(
                     child: Column(
                       children: [
-                        PrizeCard(question: category.average[0]),
-                        PrizeCard(question: category.average[1]),
-                        PrizeCard(question: category.average[2]),
-                        PrizeCard(question: category.average[3]),
+                        PrizeCard(question: widget.category.average[0]),
+                        PrizeCard(question: widget.category.average[1]),
+                        PrizeCard(question: widget.category.average[2]),
+                        PrizeCard(question: widget.category.average[3]),
                       ],
                     ),
                   ),
                   Expanded(
                     child: Column(
                       children: [
-                        PrizeCard(question: category.difficult[0]),
-                        PrizeCard(question: category.difficult[1]),
-                        PrizeCard(question: category.difficult[2]),
-                        PrizeCard(question: category.difficult[3]),
+                        PrizeCard(question: widget.category.difficult[0]),
+                        PrizeCard(question: widget.category.difficult[1]),
+                        PrizeCard(question: widget.category.difficult[2]),
+                        PrizeCard(question: widget.category.difficult[3]),
                       ],
                     ),
                   ),
@@ -122,7 +127,7 @@ class CategoryCard extends StatelessWidget {
   }
 }
 
-class PrizeCard extends StatelessWidget {
+class PrizeCard extends StatefulWidget {
   final Question question;
 
   const PrizeCard({
@@ -130,6 +135,11 @@ class PrizeCard extends StatelessWidget {
     required this.question,
   }) : super(key: key);
 
+  @override
+  State<PrizeCard> createState() => _PrizeCardState();
+}
+
+class _PrizeCardState extends State<PrizeCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -139,7 +149,7 @@ class PrizeCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          question.goToScreen();
+          widget.question.goToScreen();
         },
         child: Container(
           decoration: BoxDecoration(
@@ -153,7 +163,7 @@ class PrizeCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Text(
-                '\$${question.price}',
+                '\$${widget.question.price}',
                 style: const TextStyle(fontSize: 20),
               ),
             ),
