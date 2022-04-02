@@ -28,6 +28,8 @@ abstract class Question {
     isAnswered = true;
     this.isCorrect = isCorrect;
   }
+
+  bool isDone();
 }
 
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -60,6 +62,14 @@ class PuzzleQuestion extends Question {
   Widget getScreen(String categoryName) {
     return PuzzleScreen(categoryName: categoryName, question: this);
   }
+
+  @override
+  bool isDone() {
+    // Find puzzleChars with empty currentIndex
+    List<PuzzleChar> emptyChars =
+        puzzleChars.where((element) => element.currentIndex == null).toList();
+    return emptyChars.isEmpty;
+  }
 }
 
 class PuzzleChar {
@@ -87,6 +97,12 @@ class MultipleChoiceQuestion extends Question {
   @override
   Widget getScreen(String categoryName) {
     return MultipleQuestionScreen(categoryName: categoryName, question: this);
+  }
+
+  @override
+  bool isDone() {
+    // TODO: implement isDone
+    throw UnimplementedError();
   }
 }
 

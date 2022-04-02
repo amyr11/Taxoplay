@@ -186,7 +186,11 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                         },
                       ),
                     ),
-                    DefaultButton(onPressed: () {}, text: 'Submit'),
+                    DefaultButton(
+                      enabled: widget.question.isDone(),
+                      onPressed: () {},
+                      text: 'Submit',
+                    ),
                   ],
                 ),
               ),
