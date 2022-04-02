@@ -2,7 +2,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/constants.dart';
-import 'package:taxoplay/helpers/empty_space.dart';
+import 'package:taxoplay/helpers/dialogs.dart';
 import 'package:taxoplay/models/category.dart';
 import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
 
@@ -55,17 +55,11 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
       body: WillPopScope(
         onWillPop: () async {
           // Notify user that changes will not be saved
-          CoolAlert.show(
-            context: context,
-            type: CoolAlertType.warning,
-            confirmBtnText: 'Cancel',
-            cancelBtnText: 'Leave',
-            backgroundColor: kBackgroundColor,
-            confirmBtnColor: kPrimaryColor,
-            showCancelBtn: true,
-            title: 'Warning',
-            text:
-                'Are you sure you want to leave? Your progress will not be saved.',
+          customDialog(
+            context,
+            CoolAlertType.warning,
+            'Warning',
+            'Are you sure you want to leave?\nYour progress will not be saved.',
             onConfirmBtnTap: () {
               Navigator.pop(context);
             },

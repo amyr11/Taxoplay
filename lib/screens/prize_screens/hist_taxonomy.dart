@@ -4,6 +4,8 @@ import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/models/category.dart';
 
+import '../../helpers/dialogs.dart';
+
 const String categoryName = 'History of Taxonomy';
 
 class HistTaxonomyScreen extends StatefulWidget {
@@ -110,17 +112,11 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
       appBar: AppBar(),
       body: WillPopScope(
         onWillPop: () async {
-          CoolAlert.show(
-            context: context,
-            type: CoolAlertType.warning,
-            confirmBtnText: 'Cancel',
-            cancelBtnText: 'Leave',
-            backgroundColor: kBackgroundColor,
-            confirmBtnColor: kPrimaryColor,
-            showCancelBtn: true,
-            title: 'Warning',
-            text:
-                'Are you sure you want to leave? Your progress will not be saved.',
+          customDialog(
+            context,
+            CoolAlertType.warning,
+            'Warning',
+            'Are you sure you want to leave?\n Your progress will not be saved.',
             onConfirmBtnTap: () {
               Navigator.pop(context);
             },
