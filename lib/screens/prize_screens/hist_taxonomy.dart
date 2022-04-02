@@ -266,6 +266,31 @@ class _PrizeCardState extends State<PrizeCard> {
     }
   }
 
+  void showDialog() {
+    CoolAlertType alertType;
+    String title;
+
+    if (widget.question.isCorrect) {
+      alertType = CoolAlertType.success;
+      title = 'Correct';
+    } else {
+      alertType = CoolAlertType.error;
+      title = 'Wrong';
+    }
+
+    customDialog(
+      context,
+      alertType,
+      title: title,
+      confirmBtnText: 'Proceed',
+      onConfirmBtnTap: () {
+        Navigator.pop(context);
+      },
+      barrierDismissible: false,
+      autoCloseDuration: const Duration(seconds: 3),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -282,6 +307,7 @@ class _PrizeCardState extends State<PrizeCard> {
                         builder: ((context) =>
                             widget.question.getScreen(categoryName))));
                 await Future.delayed(const Duration(milliseconds: 500));
+                showDialog();
                 updateQuestion(updatedQuestion);
               }
             : null,

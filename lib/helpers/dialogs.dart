@@ -14,6 +14,7 @@ Future<dynamic> customDialog(
   String cancelBtnText = 'Cancel',
   bool showCancelBtn = false,
   bool barrierDismissible = true,
+  Duration? autoCloseDuration,
 }) {
   return CoolAlert.show(
     context: context,
@@ -28,5 +29,6 @@ Future<dynamic> customDialog(
     onConfirmBtnTap: onConfirmBtnTap,
     onCancelBtnTap: onCancelBtnTap,
     barrierDismissible: barrierDismissible,
+    autoCloseDuration: autoCloseDuration,
   );
 }
