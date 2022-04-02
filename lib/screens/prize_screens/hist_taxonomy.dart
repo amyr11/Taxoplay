@@ -258,7 +258,7 @@ class PrizeCard extends StatefulWidget {
 }
 
 class _PrizeCardState extends State<PrizeCard> {
-  void updateQuestion(Question updatedQuestion) {
+  void updateQuestion(Question updatedQuestion) async {
     if (mounted) {
       setState(() {
         widget.question = updatedQuestion;
@@ -266,28 +266,35 @@ class _PrizeCardState extends State<PrizeCard> {
     }
   }
 
-  void showDialog() {
-    CoolAlertType alertType;
-    String title;
+  void showDialog() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    if (mounted) {
+      CoolAlertType alertType;
+      String title;
+      String? text;
 
-    if (widget.question.isCorrect) {
-      alertType = CoolAlertType.success;
-      title = 'Correct';
-    } else {
-      alertType = CoolAlertType.error;
-      title = 'Wrong';
+      if (widget.question.isCorrect) {
+        alertType = CoolAlertType.success;
+        title = 'Correct';
+        text = '+\$${widget.question.price}';
+      } else {
+        alertType = CoolAlertType.error;
+        title = 'Wrong';
+        text = null;
+      }
+
+      customDialog(
+        context,
+        alertType,
+        title: title,
+        text: text,
+        confirmBtnText: 'Proceed',
+        onConfirmBtnTap: () {
+          Navigator.pop(context);
+        },
+        barrierDismissible: false,
+      );
     }
-
-    customDialog(
-      context,
-      alertType,
-      title: title,
-      confirmBtnText: 'Proceed',
-      onConfirmBtnTap: () {
-        Navigator.pop(context);
-      },
-      barrierDismissible: false,
-    );
   }
 
   @override
@@ -306,7 +313,6 @@ class _PrizeCardState extends State<PrizeCard> {
                         builder: ((context) =>
                             widget.question.getScreen(categoryName))));
                 updateQuestion(updatedQuestion);
-                await Future.delayed(const Duration(milliseconds: 500));
                 showDialog();
               }
             : null,
