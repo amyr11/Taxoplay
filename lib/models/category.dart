@@ -54,7 +54,6 @@ class PuzzleQuestion extends Question {
       puzzleChoices.add(alphabet[Random().nextInt(alphabet.length)]);
     }
     puzzleChoices.shuffle();
-    print('puzzlechoice.length: ${puzzleChoices.length}');
   }
 
   @override
