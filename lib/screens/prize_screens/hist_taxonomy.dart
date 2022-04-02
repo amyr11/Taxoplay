@@ -287,7 +287,6 @@ class _PrizeCardState extends State<PrizeCard> {
         Navigator.pop(context);
       },
       barrierDismissible: false,
-      autoCloseDuration: const Duration(seconds: 3),
     );
   }
 
@@ -306,9 +305,9 @@ class _PrizeCardState extends State<PrizeCard> {
                     MaterialPageRoute(
                         builder: ((context) =>
                             widget.question.getScreen(categoryName))));
+                updateQuestion(updatedQuestion);
                 await Future.delayed(const Duration(milliseconds: 500));
                 showDialog();
-                updateQuestion(updatedQuestion);
               }
             : null,
         child: AnimatedCrossFade(
