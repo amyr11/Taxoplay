@@ -18,6 +18,33 @@ class PuzzleScreen extends StatefulWidget {
 }
 
 class _PuzzleScreenState extends State<PuzzleScreen> {
+  void addChar(int choiceIndex) {
+    setState(() {
+      // Find first index that has empty puzzleChar
+      int emptyIndex = widget.question.puzzleChars
+          .indexWhere((element) => element.currentIndex == null);
+
+      // Add the index and value of the choice to puzzleChars
+      if (emptyIndex >= 0) {
+        widget.question.puzzleChars[emptyIndex].currentIndex = choiceIndex;
+        widget.question.puzzleChars[emptyIndex].currentValue =
+            widget.question.puzzleChoices[choiceIndex];
+      }
+    });
+  }
+
+  void removeChar(int charIndex) {
+    // Ignore if the character tapped is a hint
+    if (widget.question.puzzleChars[charIndex].isHint) {
+      return;
+    }
+
+    // Remove the character from the puzzle
+    setState(() {
+      widget.question.puzzleChars[charIndex].clearValue();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +102,10 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 2.5),
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    removeChar(widget.question.puzzleChars
+                                        .indexOf(char));
+                                  },
                                   child: Container(
                                     alignment: Alignment.center,
                                     padding: const EdgeInsets.symmetric(
@@ -131,7 +161,9 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                                   choiceTaken ? kGreyedColor : kPrimaryColor;
 
                               return InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  addChar(index);
+                                },
                                 child: Container(
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
