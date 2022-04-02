@@ -6,7 +6,7 @@ import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
 
 class PuzzleScreen extends StatefulWidget {
   final String categoryName;
-  final Question question;
+  final PuzzleQuestion question;
 
   const PuzzleScreen(
       {Key? key, required this.categoryName, required this.question})
@@ -32,13 +32,18 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                '\$${widget.question.price}',
-                style: const TextStyle(fontSize: 34),
+              Container(
+                padding: EdgeInsets.only(top: kDefaultSpace / 2),
+                child: Text(
+                  '\$${widget.question.price}',
+                  style: const TextStyle(fontSize: 34),
+                ),
               ),
-              vSpace(kDefaultSpace / 2),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: kDefaultSpace / 3),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: kDefaultSpace / 3,
+                  vertical: kDefaultSpace / 2,
+                ),
                 child: Text(
                   widget.question.question,
                   textAlign: TextAlign.center,
@@ -46,6 +51,45 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                     color: kSecondaryColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: LayoutBuilder(
+                  builder: (context, constraints) => Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: widget.question.puzzleChars.map((char) {
+                      Color charColor =
+                          char.isHint ? kSecondaryColor : Colors.white;
+
+                      return Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 2.5),
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              decoration: BoxDecoration(
+                                color: kPrimaryColor,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                char.currentValue ?? '',
+                                style: TextStyle(
+                                  color: charColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ),
               ),

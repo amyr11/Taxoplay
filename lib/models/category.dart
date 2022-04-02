@@ -30,12 +30,40 @@ abstract class Question {
 
 class PuzzleQuestion extends Question {
   final List<int> hints;
+  List<PuzzleChar> puzzleChars = [];
+
   PuzzleQuestion(int price, String question, String answer, this.hints)
-      : super(price, question, answer);
+      : super(price, question, answer) {
+    List<String> splitAnswer = answer.split('').toList();
+    for (int i = 0; i < splitAnswer.length; i++) {
+      bool isHint = hints.contains(i);
+      String correctValue = answer[i];
+      String? currentValue = isHint ? correctValue : null;
+      int? currentIndex = isHint ? -1 : null;
+
+      puzzleChars
+          .add(PuzzleChar(currentValue, currentIndex, correctValue, isHint));
+    }
+  }
 
   @override
   Widget getScreen(String categoryName) {
     return PuzzleScreen(categoryName: categoryName, question: this);
+  }
+}
+
+class PuzzleChar {
+  String? currentValue;
+  int? currentIndex;
+  String correctValue;
+  bool isHint;
+
+  PuzzleChar(
+      this.currentValue, this.currentIndex, this.correctValue, this.isHint);
+
+  void clearValue() {
+    currentValue = null;
+    currentIndex = null;
   }
 }
 
