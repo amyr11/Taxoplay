@@ -50,10 +50,11 @@ class PuzzleQuestion extends Question {
           .add(PuzzleChar(currentValue, currentIndex, correctValue, isHint));
     }
     puzzleChoices.addAll(splitAnswer);
-    for (int i = puzzleChoices.length; i <= 16; i++) {
+    for (int i = puzzleChoices.length; i < 16; i++) {
       puzzleChoices.add(alphabet[Random().nextInt(alphabet.length)]);
     }
     puzzleChoices.shuffle();
+    print('puzzlechoice.length: ${puzzleChoices.length}');
   }
 
   @override
