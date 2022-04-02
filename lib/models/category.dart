@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:taxoplay/screens/multiple_question/multiple_question_screen.dart';
 import 'package:taxoplay/screens/puzzle/puzzle_screen.dart';
@@ -28,9 +30,12 @@ abstract class Question {
   }
 }
 
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
 class PuzzleQuestion extends Question {
   final List<int> hints;
   List<PuzzleChar> puzzleChars = [];
+  List<String> puzzleChoices = [];
 
   PuzzleQuestion(int price, String question, String answer, this.hints)
       : super(price, question, answer) {
@@ -44,6 +49,11 @@ class PuzzleQuestion extends Question {
       puzzleChars
           .add(PuzzleChar(currentValue, currentIndex, correctValue, isHint));
     }
+    puzzleChoices.addAll(splitAnswer);
+    for (int i = puzzleChoices.length; i <= 16; i++) {
+      puzzleChoices.add(alphabet[Random().nextInt(alphabet.length)]);
+    }
+    puzzleChoices.shuffle();
   }
 
   @override

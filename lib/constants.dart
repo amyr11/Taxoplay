@@ -8,6 +8,7 @@ Color kBackgroundColor = const Color.fromARGB(255, 22, 29, 68);
 Color kButtonColor = const Color.fromARGB(255, 13, 19, 52);
 Color kDarkGreenColor = const Color.fromARGB(255, 22, 68, 46);
 Color kDarkRedColor = const Color.fromARGB(255, 68, 30, 22);
+Color kGreyedColor = const Color.fromARGB(255, 103, 108, 137);
 
 // Metrics
 double kDefaultSpace = 50.0;
