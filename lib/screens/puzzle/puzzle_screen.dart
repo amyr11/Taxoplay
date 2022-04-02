@@ -181,7 +181,9 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
 
                               return InkWell(
                                 onTap: () {
-                                  addChar(index);
+                                  if (!choiceTaken) {
+                                    addChar(index);
+                                  }
                                 },
                                 child: Container(
                                   alignment: Alignment.center,
