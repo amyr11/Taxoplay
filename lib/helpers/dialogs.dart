@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-void customDialog(
+Future<dynamic> customDialog(
   BuildContext context,
   CoolAlertType type, {
   String? title,
@@ -13,8 +13,9 @@ void customDialog(
   String confirmBtnText = 'Ok',
   String cancelBtnText = 'Cancel',
   bool showCancelBtn = false,
+  bool barrierDismissible = true,
 }) {
-  CoolAlert.show(
+  return CoolAlert.show(
     context: context,
     type: type,
     confirmBtnText: confirmBtnText,
@@ -26,5 +27,6 @@ void customDialog(
     text: text,
     onConfirmBtnTap: onConfirmBtnTap,
     onCancelBtnTap: onCancelBtnTap,
+    barrierDismissible: barrierDismissible,
   );
 }

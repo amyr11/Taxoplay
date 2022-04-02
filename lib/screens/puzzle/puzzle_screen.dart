@@ -209,7 +209,28 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                       enabled: widget.question.isDone(),
                       onPressed: () {
                         widget.question.checkAnswer();
-                        Navigator.pop(context, widget.question);
+                        CoolAlertType alertType;
+                        String title;
+
+                        if (widget.question.isCorrect) {
+                          alertType = CoolAlertType.success;
+                          title = 'Correct';
+                        } else {
+                          alertType = CoolAlertType.error;
+                          title = 'Wrong';
+                        }
+
+                        customDialog(
+                          context,
+                          alertType,
+                          title: title,
+                          confirmBtnText: 'Proceed',
+                          onConfirmBtnTap: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context, widget.question);
+                          },
+                          barrierDismissible: false,
+                        );
                       },
                       text: 'Submit',
                     ),
