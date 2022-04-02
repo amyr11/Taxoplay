@@ -266,6 +266,7 @@ class _PrizeCardState extends State<PrizeCard> {
               MaterialPageRoute(
                   builder: ((context) =>
                       widget.question.getScreen(categoryName))));
+          await Future.delayed(const Duration(milliseconds: 500));
           updateQuestion(isCorrect);
         },
         child: Container(
