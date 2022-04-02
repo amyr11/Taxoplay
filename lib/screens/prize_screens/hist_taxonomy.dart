@@ -118,6 +118,9 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
             title: 'Warning',
             text:
                 'Are you sure you want to leave?\nYour progress will not be saved.',
+            confirmBtnText: 'Cancel',
+            cancelBtnText: 'Leave',
+            showCancelBtn: true,
             onConfirmBtnTap: () {
               Navigator.pop(context);
             },
