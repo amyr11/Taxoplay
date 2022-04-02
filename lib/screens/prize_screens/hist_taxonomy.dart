@@ -247,16 +247,17 @@ class _PrizeCardState extends State<PrizeCard> {
         vertical: 7,
       ),
       child: InkWell(
-        onTap: () async {
-          // question.getScreen();
-          final updatedQuestion = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: ((context) =>
-                      widget.question.getScreen(categoryName))));
-          await Future.delayed(const Duration(milliseconds: 500));
-          updateQuestion(updatedQuestion);
-        },
+        onTap: !widget.question.isAnswered
+            ? () async {
+                final updatedQuestion = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) =>
+                            widget.question.getScreen(categoryName))));
+                await Future.delayed(const Duration(milliseconds: 500));
+                updateQuestion(updatedQuestion);
+              }
+            : null,
         child: AnimatedCrossFade(
             firstChild: buildPriceCard(Colors.transparent),
             secondChild: widget.question.isCorrect
