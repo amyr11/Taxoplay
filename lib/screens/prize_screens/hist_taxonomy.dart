@@ -267,8 +267,7 @@ class _PrizeCardState extends State<PrizeCard> {
   }
 
   void showDialog() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    if (mounted) {
+    if (mounted && widget.question.isAnswered) {
       CoolAlertType alertType;
       String title;
       String? text;
@@ -283,6 +282,7 @@ class _PrizeCardState extends State<PrizeCard> {
         text = null;
       }
 
+      await Future.delayed(const Duration(milliseconds: 500));
       customDialog(
         context,
         alertType,
