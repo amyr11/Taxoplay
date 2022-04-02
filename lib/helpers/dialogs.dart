@@ -5,9 +5,9 @@ import '../constants.dart';
 
 void customDialog(
   BuildContext context,
-  CoolAlertType type,
-  String title,
-  String text, {
+  CoolAlertType type, {
+  String? title,
+  String? text,
   void Function()? onConfirmBtnTap,
   void Function()? onCancelBtnTap,
   String confirmBtnText = 'Ok',

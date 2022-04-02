@@ -115,8 +115,9 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
           customDialog(
             context,
             CoolAlertType.warning,
-            'Warning',
-            'Are you sure you want to leave?\n Your progress will not be saved.',
+            title: 'Warning',
+            text:
+                'Are you sure you want to leave?\nYour progress will not be saved.',
             onConfirmBtnTap: () {
               Navigator.pop(context);
             },
