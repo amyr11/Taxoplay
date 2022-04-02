@@ -221,9 +221,9 @@ class CategoryCard extends StatelessWidget {
 }
 
 class PrizeCard extends StatefulWidget {
-  final Question question;
+  Question question;
 
-  const PrizeCard({
+  PrizeCard({
     Key? key,
     required this.question,
   }) : super(key: key);
@@ -233,9 +233,9 @@ class PrizeCard extends StatefulWidget {
 }
 
 class _PrizeCardState extends State<PrizeCard> {
-  void updateQuestion(bool isCorrect) {
+  void updateQuestion(Question updatedQuestion) {
     setState(() {
-      widget.question.setAnswered(isCorrect);
+      widget.question = updatedQuestion;
     });
   }
 
@@ -249,13 +249,13 @@ class _PrizeCardState extends State<PrizeCard> {
       child: InkWell(
         onTap: () async {
           // question.getScreen();
-          final isCorrect = await Navigator.push(
+          final updatedQuestion = await Navigator.push(
               context,
               MaterialPageRoute(
                   builder: ((context) =>
                       widget.question.getScreen(categoryName))));
           await Future.delayed(const Duration(milliseconds: 500));
-          updateQuestion(isCorrect);
+          updateQuestion(updatedQuestion);
         },
         child: AnimatedCrossFade(
             firstChild: buildPriceCard(Colors.transparent),

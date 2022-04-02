@@ -53,7 +53,8 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
       ),
       body: WillPopScope(
         onWillPop: () async {
-          Navigator.pop(context, true);
+          // TODO: Notify user that changes will not be saved
+          Navigator.pop(context, widget.question);
           return false;
         },
         child: Center(
@@ -190,7 +191,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                       enabled: widget.question.isDone(),
                       onPressed: () {
                         widget.question.checkAnswer();
-                        Navigator.pop(context, widget.question.isCorrect);
+                        Navigator.pop(context, widget.question);
                       },
                       text: 'Submit',
                     ),

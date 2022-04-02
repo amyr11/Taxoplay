@@ -24,7 +24,7 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
       ),
       body: WillPopScope(
         onWillPop: () async {
-          Navigator.pop(context, false);
+          Navigator.pop(context, widget.question);
           return false;
         },
         child: Column(),

@@ -24,9 +24,8 @@ abstract class Question {
 
   Widget getScreen(String categoryName);
 
-  void setAnswered(bool isCorrect) {
+  void checkAnswer() {
     isAnswered = true;
-    this.isCorrect = isCorrect;
   }
 
   bool isDone();
@@ -71,7 +70,9 @@ class PuzzleQuestion extends Question {
     return emptyChars.isEmpty;
   }
 
+  @override
   void checkAnswer() {
+    super.checkAnswer();
     for (PuzzleChar char in puzzleChars) {
       if (!char.evaluate()) {
         return;
