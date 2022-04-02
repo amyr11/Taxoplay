@@ -1,3 +1,4 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/constants.dart';
@@ -107,78 +108,102 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                category.name,
-                style: TextStyle(
-                  fontSize: 30,
-                  color: kSecondaryColor,
-                  fontWeight: FontWeight.bold,
+      body: WillPopScope(
+        onWillPop: () async {
+          CoolAlert.show(
+            context: context,
+            type: CoolAlertType.warning,
+            confirmBtnText: 'Cancel',
+            cancelBtnText: 'Leave',
+            backgroundColor: kBackgroundColor,
+            confirmBtnColor: kPrimaryColor,
+            showCancelBtn: true,
+            title: 'Warning',
+            text:
+                'Are you sure you want to leave? Your progress will not be saved.',
+            onConfirmBtnTap: () {
+              Navigator.pop(context);
+            },
+            onCancelBtnTap: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+          );
+          return false;
+        },
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  category.name,
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: kSecondaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: kDefaultSpace / 2),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Expanded(
-                          child: CategoryCard(category: 'Easy'),
-                        ),
-                        Expanded(
-                          child: CategoryCard(category: 'Average'),
-                        ),
-                        Expanded(
-                          child: CategoryCard(category: 'Difficult'),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            children: [
-                              PrizeCard(question: category.easy[0]),
-                              PrizeCard(question: category.easy[1]),
-                              PrizeCard(question: category.easy[2]),
-                              PrizeCard(question: category.easy[3]),
-                            ],
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: kDefaultSpace / 2),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Expanded(
+                            child: CategoryCard(category: 'Easy'),
                           ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              PrizeCard(question: category.average[0]),
-                              PrizeCard(question: category.average[1]),
-                              PrizeCard(question: category.average[2]),
-                              PrizeCard(question: category.average[3]),
-                            ],
+                          Expanded(
+                            child: CategoryCard(category: 'Average'),
                           ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              PrizeCard(question: category.difficult[0]),
-                              PrizeCard(question: category.difficult[1]),
-                              PrizeCard(question: category.difficult[2]),
-                              PrizeCard(question: category.difficult[3]),
-                            ],
+                          Expanded(
+                            child: CategoryCard(category: 'Difficult'),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                PrizeCard(question: category.easy[0]),
+                                PrizeCard(question: category.easy[1]),
+                                PrizeCard(question: category.easy[2]),
+                                PrizeCard(question: category.easy[3]),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                PrizeCard(question: category.average[0]),
+                                PrizeCard(question: category.average[1]),
+                                PrizeCard(question: category.average[2]),
+                                PrizeCard(question: category.average[3]),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                PrizeCard(question: category.difficult[0]),
+                                PrizeCard(question: category.difficult[1]),
+                                PrizeCard(question: category.difficult[2]),
+                                PrizeCard(question: category.difficult[3]),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              DefaultButton(onPressed: () {}, text: 'Show Score'),
-            ],
+                DefaultButton(onPressed: () {}, text: 'Show Score'),
+              ],
+            ),
           ),
         ),
       ),
@@ -234,9 +259,11 @@ class PrizeCard extends StatefulWidget {
 
 class _PrizeCardState extends State<PrizeCard> {
   void updateQuestion(Question updatedQuestion) {
-    setState(() {
-      widget.question = updatedQuestion;
-    });
+    if (mounted) {
+      setState(() {
+        widget.question = updatedQuestion;
+      });
+    }
   }
 
   @override
