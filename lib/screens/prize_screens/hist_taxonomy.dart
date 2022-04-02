@@ -270,7 +270,7 @@ class _PrizeCardState extends State<PrizeCard> {
     if (mounted && widget.question.isAnswered) {
       CoolAlertType alertType;
       String title;
-      String? text;
+      String text;
 
       if (widget.question.isCorrect) {
         alertType = CoolAlertType.success;
@@ -279,7 +279,7 @@ class _PrizeCardState extends State<PrizeCard> {
       } else {
         alertType = CoolAlertType.error;
         title = 'Wrong';
-        text = null;
+        text = 'The correct answer is "${widget.question.answer}"';
       }
 
       await Future.delayed(const Duration(milliseconds: 500));
