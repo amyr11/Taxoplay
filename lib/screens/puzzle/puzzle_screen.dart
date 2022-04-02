@@ -171,7 +171,9 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Text(
-                                    widget.question.puzzleChoices[index],
+                                    choiceTaken
+                                        ? ''
+                                        : widget.question.puzzleChoices[index],
                                     style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
