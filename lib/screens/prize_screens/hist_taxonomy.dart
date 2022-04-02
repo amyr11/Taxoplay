@@ -269,23 +269,35 @@ class _PrizeCardState extends State<PrizeCard> {
           await Future.delayed(const Duration(milliseconds: 500));
           updateQuestion(isCorrect);
         },
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: getColor(),
-            border: Border.all(
-              width: 2,
-              color: kPrimaryLightColor,
-            ),
-          ),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Text(
-                '\$${widget.question.price}',
-                style: const TextStyle(fontSize: 20),
-              ),
-            ),
+        child: AnimatedCrossFade(
+            firstChild: buildPriceCard(Colors.transparent),
+            secondChild: widget.question.isCorrect
+                ? buildPriceCard(kDarkGreenColor)
+                : buildPriceCard(kDarkRedColor),
+            crossFadeState: widget.question.isAnswered
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            duration: const Duration(milliseconds: 500)),
+      ),
+    );
+  }
+
+  Container buildPriceCard(Color color) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: color,
+        border: Border.all(
+          width: 2,
+          color: kPrimaryLightColor,
+        ),
+      ),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: Text(
+            '\$${widget.question.price}',
+            style: const TextStyle(fontSize: 20),
           ),
         ),
       ),
