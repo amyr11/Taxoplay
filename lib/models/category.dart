@@ -70,6 +70,15 @@ class PuzzleQuestion extends Question {
         puzzleChars.where((element) => element.currentIndex == null).toList();
     return emptyChars.isEmpty;
   }
+
+  void checkAnswer() {
+    for (PuzzleChar char in puzzleChars) {
+      if (!char.evaluate()) {
+        return;
+      }
+    }
+    isCorrect = true;
+  }
 }
 
 class PuzzleChar {
@@ -84,6 +93,10 @@ class PuzzleChar {
   void clearValue() {
     currentValue = null;
     currentIndex = null;
+  }
+
+  bool evaluate() {
+    return currentValue == correctValue;
   }
 }
 

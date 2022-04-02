@@ -188,7 +188,10 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                     ),
                     DefaultButton(
                       enabled: widget.question.isDone(),
-                      onPressed: () {},
+                      onPressed: () {
+                        widget.question.checkAnswer();
+                        Navigator.pop(context, widget.question.isCorrect);
+                      },
                       text: 'Submit',
                     ),
                   ],

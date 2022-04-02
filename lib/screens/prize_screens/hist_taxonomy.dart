@@ -239,18 +239,6 @@ class _PrizeCardState extends State<PrizeCard> {
     });
   }
 
-  Color getColor() {
-    if (widget.question.isAnswered) {
-      if (widget.question.isCorrect) {
-        return kDarkGreenColor;
-      } else {
-        return kDarkRedColor;
-      }
-    } else {
-      return Colors.transparent;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
