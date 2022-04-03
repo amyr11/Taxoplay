@@ -6,6 +6,8 @@ import 'package:taxoplay/helpers/dialogs.dart';
 import 'package:taxoplay/models/category.dart';
 import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
 
+import '../../components/prize_question.dart';
+
 class PuzzleScreen extends StatefulWidget {
   final String categoryName;
   final PuzzleQuestion question;
@@ -201,45 +203,6 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class PrizeAndQuestion extends StatelessWidget {
-  const PrizeAndQuestion({
-    Key? key,
-    required this.question,
-  }) : super(key: key);
-
-  final Question question;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.only(top: kDefaultSpace / 2),
-          child: Text(
-            '\$${question.price}',
-            style: const TextStyle(fontSize: 34),
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: kDefaultSpace / 3,
-            vertical: kDefaultSpace / 2,
-          ),
-          child: Text(
-            question.question,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: kSecondaryColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
