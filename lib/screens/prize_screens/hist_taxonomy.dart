@@ -279,7 +279,7 @@ class _PrizeCardState extends State<PrizeCard> {
       } else {
         alertType = CoolAlertType.error;
         title = 'Wrong';
-        text = 'The correct answer is "${widget.question.answer}"';
+        text = 'The correct answer is \n"${widget.question.answer}"';
       }
 
       await Future.delayed(const Duration(milliseconds: 500));

@@ -114,6 +114,13 @@ class MultipleChoiceQuestion extends Question {
     _choices.add(answer);
     _choices.addAll(wrongAnswers);
     _choices.shuffle();
+
+    int noneOfTheAbove = _choices
+        .indexWhere((element) => element.toLowerCase() == 'none of the above');
+    if (noneOfTheAbove >= 0) {
+      _choices.removeAt(noneOfTheAbove);
+      _choices.add('None of the above');
+    }
   }
 
   @override

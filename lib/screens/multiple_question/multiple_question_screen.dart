@@ -82,6 +82,8 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
                         child: Row(
                           children: [
                             Radio<String>(
+                              fillColor: MaterialStateProperty.all<Color>(
+                                  kSecondaryColor),
                               value: widget.question.choices[index],
                               groupValue: widget.question.currentAnswer,
                               onChanged: (String? value) {
@@ -108,7 +110,11 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
               child: Column(
                 children: [
                   DefaultButton(
-                    onPressed: () {},
+                    enabled: widget.question.isDone(),
+                    onPressed: () {
+                      widget.question.checkAnswer();
+                      Navigator.pop(context, widget.question);
+                    },
                     text: 'Submit',
                   ),
                 ],
