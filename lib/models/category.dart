@@ -103,10 +103,18 @@ class PuzzleChar {
 
 class MultipleChoiceQuestion extends Question {
   final List<String> wrongAnswers;
+  final List<String> _choices = [];
+  String? currentAnswer;
+
+  get choices => _choices;
 
   MultipleChoiceQuestion(
       int price, String question, String answer, this.wrongAnswers)
-      : super(price, question, answer);
+      : super(price, question, answer) {
+    _choices.add(answer);
+    _choices.addAll(wrongAnswers);
+    _choices.shuffle();
+  }
 
   @override
   Widget getScreen(String categoryName) {
@@ -114,9 +122,14 @@ class MultipleChoiceQuestion extends Question {
   }
 
   @override
+  void checkAnswer() {
+    super.checkAnswer();
+    isCorrect = currentAnswer == answer;
+  }
+
+  @override
   bool isDone() {
-    // TODO: implement isDone
-    throw UnimplementedError();
+    return currentAnswer != null;
   }
 }
 

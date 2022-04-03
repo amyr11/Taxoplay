@@ -1,6 +1,8 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:taxoplay/components/buttons.dart';
+import 'package:taxoplay/constants.dart';
+import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
 import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
 
@@ -9,7 +11,7 @@ import '../../helpers/dialogs.dart';
 
 class MultipleQuestionScreen extends StatefulWidget {
   final String categoryName;
-  final Question question;
+  final MultipleChoiceQuestion question;
 
   const MultipleQuestionScreen(
       {Key? key, required this.categoryName, required this.question})
@@ -20,6 +22,12 @@ class MultipleQuestionScreen extends StatefulWidget {
 }
 
 class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
+  void setAnswer(String? answer) {
+    setState(() {
+      widget.question.currentAnswer = answer;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,8 +58,62 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
           return false;
         },
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            PrizeAndQuestion(question: widget.question),
+            Expanded(
+              flex: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  PrizeAndQuestion(question: widget.question),
+                  vSpace(kDefaultSpace),
+                  ListView.builder(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: kDefaultSpace / 3),
+                    shrinkWrap: true,
+                    itemCount: widget.question.choices.length,
+                    itemBuilder: (context, index) {
+                      String value = widget.question.choices[index];
+
+                      return InkWell(
+                        onTap: () {
+                          setAnswer(value);
+                        },
+                        child: Row(
+                          children: [
+                            Radio<String>(
+                              value: widget.question.choices[index],
+                              groupValue: widget.question.currentAnswer,
+                              onChanged: (String? value) {
+                                setAnswer(value);
+                              },
+                            ),
+                            hSpace(10),
+                            Text(
+                              widget.question.choices[index],
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Column(
+                children: [
+                  DefaultButton(
+                    onPressed: () {},
+                    text: 'Submit',
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
