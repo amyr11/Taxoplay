@@ -78,8 +78,8 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
         [
           'Monomial system of nomenclature',
           'Trinomial system of nomenclature',
-          'None of the above'
         ],
+        includeNone: true,
       ),
       MultipleChoiceQuestion(
         500,

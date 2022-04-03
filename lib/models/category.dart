@@ -109,16 +109,14 @@ class MultipleChoiceQuestion extends Question {
   get choices => _choices;
 
   MultipleChoiceQuestion(
-      int price, String question, String answer, this.wrongAnswers)
+      int price, String question, String answer, this.wrongAnswers,
+      {bool includeNone = false})
       : super(price, question, answer) {
     _choices.add(answer);
     _choices.addAll(wrongAnswers);
     _choices.shuffle();
 
-    int noneOfTheAbove = _choices
-        .indexWhere((element) => element.toLowerCase() == 'none of the above');
-    if (noneOfTheAbove >= 0) {
-      _choices.removeAt(noneOfTheAbove);
+    if (includeNone) {
       _choices.add('None of the above');
     }
   }
