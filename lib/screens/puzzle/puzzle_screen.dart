@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/dialogs.dart';
+import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
 import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
 
@@ -86,6 +87,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     PrizeAndQuestion(question: widget.question),
+                    vSpace(kDefaultSpace),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: LayoutBuilder(

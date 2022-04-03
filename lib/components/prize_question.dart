@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taxoplay/helpers/empty_space.dart';
 
 import '../constants.dart';
 import '../models/category.dart';
@@ -15,18 +16,13 @@ class PrizeAndQuestion extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          padding: EdgeInsets.only(top: kDefaultSpace / 2),
-          child: Text(
-            '\$${question.price}',
-            style: const TextStyle(fontSize: 34),
-          ),
+        Text(
+          '\$${question.price}',
+          style: const TextStyle(fontSize: 34),
         ),
+        vSpace(kDefaultSpace / 2),
         Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: kDefaultSpace / 3,
-            vertical: kDefaultSpace / 2,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: kDefaultSpace / 3),
           child: Text(
             question.question,
             textAlign: TextAlign.center,
