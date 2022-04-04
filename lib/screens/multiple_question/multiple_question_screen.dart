@@ -13,9 +13,13 @@ import '../../helpers/dialogs.dart';
 class MultipleQuestionScreen extends StatefulWidget {
   final String categoryName;
   final MultipleChoiceQuestion question;
+  final bool timed;
 
   const MultipleQuestionScreen(
-      {Key? key, required this.categoryName, required this.question})
+      {Key? key,
+      required this.categoryName,
+      required this.question,
+      this.timed = false})
       : super(key: key);
 
   @override
@@ -52,7 +56,7 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
             },
             onCancelBtnTap: () {
               Navigator.pop(context);
-              Navigator.pop(context, widget.question);
+              Navigator.pop(context, Result(widget.question));
               Navigator.pop(context);
             },
           );
@@ -62,7 +66,13 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              flex: 3,
+              flex: widget.timed ? 1 : 0,
+              child: Container(
+                child: null,
+              ),
+            ),
+            Expanded(
+              flex: 7,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -107,7 +117,7 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Column(
                 children: [
                   DefaultButton(

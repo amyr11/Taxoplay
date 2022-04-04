@@ -73,7 +73,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
             },
             onCancelBtnTap: () {
               Navigator.pop(context);
-              Navigator.pop(context, widget.question);
+              Navigator.pop(context, Result(widget.question));
               Navigator.pop(context);
             },
           );
