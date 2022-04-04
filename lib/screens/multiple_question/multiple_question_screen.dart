@@ -19,7 +19,7 @@ class MultipleQuestionScreen extends StatefulWidget {
       {Key? key,
       required this.categoryName,
       required this.question,
-      this.timed = true})
+      this.timed = false})
       : super(key: key);
 
   @override
