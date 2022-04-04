@@ -81,6 +81,7 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
           'Trinomial system of nomenclature',
         ],
         includeNone: true,
+        timed: true,
       ),
       MultipleChoiceQuestion(
         500,
@@ -91,6 +92,7 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
           'New bacteria and alive bacteria',
           'True bacteria and dead bacteria'
         ],
+        timed: true,
       ),
       PuzzleQuestion(
         600,

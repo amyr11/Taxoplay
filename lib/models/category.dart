@@ -19,8 +19,9 @@ abstract class Question {
   final String answer;
   bool isAnswered = false;
   bool isCorrect = false;
+  final bool timed;
 
-  Question(this.price, this.question, this.answer);
+  Question(this.price, this.question, this.answer, {this.timed = false});
 
   Widget getScreen(String categoryName);
 
@@ -110,8 +111,8 @@ class MultipleChoiceQuestion extends Question {
 
   MultipleChoiceQuestion(
       int price, String question, String answer, this.wrongAnswers,
-      {bool includeNone = false})
-      : super(price, question, answer) {
+      {bool includeNone = false, bool timed = false})
+      : super(price, question, answer, timed: timed) {
     _choices.add(answer);
     _choices.addAll(wrongAnswers);
     _choices.shuffle();
@@ -123,7 +124,11 @@ class MultipleChoiceQuestion extends Question {
 
   @override
   Widget getScreen(String categoryName) {
-    return MultipleQuestionScreen(categoryName: categoryName, question: this);
+    return MultipleQuestionScreen(
+      categoryName: categoryName,
+      question: this,
+      timed: timed,
+    );
   }
 
   @override
