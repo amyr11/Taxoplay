@@ -19,7 +19,7 @@ class MultipleQuestionScreen extends StatefulWidget {
       {Key? key,
       required this.categoryName,
       required this.question,
-      this.timed = false})
+      this.timed = true})
       : super(key: key);
 
   @override
@@ -63,16 +63,16 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
           return false;
         },
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
               flex: widget.timed ? 1 : 0,
-              child: Container(
-                child: null,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: widget.timed ? CustomTimer() : null,
               ),
             ),
             Expanded(
-              flex: 7,
+              flex: 3,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -117,8 +117,11 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: widget.timed ? 2 : 1,
               child: Column(
+                mainAxisAlignment: widget.timed
+                    ? MainAxisAlignment.center
+                    : MainAxisAlignment.start,
                 children: [
                   DefaultButton(
                     enabled: widget.question.isDone(),
@@ -133,6 +136,38 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CustomTimer extends StatelessWidget {
+  const CustomTimer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          vertical: kDefaultSpace / 2, horizontal: kDefaultSpace / 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: kPrimaryColor,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 35),
+              child: Text(
+                '1:00',
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
