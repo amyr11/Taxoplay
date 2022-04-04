@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/models/category.dart';
+import 'package:taxoplay/models/result.dart';
 
 import '../../helpers/dialogs.dart';
 
@@ -266,7 +267,7 @@ class _PrizeCardState extends State<PrizeCard> {
     }
   }
 
-  void showDialog() async {
+  void showDialog(bool timeRanOut) async {
     if (mounted && widget.question.isAnswered) {
       CoolAlertType alertType;
       String title;
@@ -278,7 +279,7 @@ class _PrizeCardState extends State<PrizeCard> {
         text = '+\$${widget.question.price}';
       } else {
         alertType = CoolAlertType.error;
-        title = 'Wrong';
+        title = timeRanOut ? 'Time\'s Up!' : 'Wrong';
         text = 'The correct answer is \n"${widget.question.answer}"';
       }
 
@@ -307,13 +308,13 @@ class _PrizeCardState extends State<PrizeCard> {
       child: InkWell(
         onTap: !widget.question.isAnswered
             ? () async {
-                final updatedQuestion = await Navigator.push(
+                final Result result = await Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: ((context) =>
                             widget.question.getScreen(categoryName))));
-                updateQuestion(updatedQuestion);
-                showDialog();
+                updateQuestion(result.updatedQuestion);
+                showDialog(result.timeRanOut);
               }
             : null,
         child: AnimatedCrossFade(

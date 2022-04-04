@@ -5,6 +5,7 @@ import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/dialogs.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
+import 'package:taxoplay/models/result.dart';
 import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
 
 import '../../components/prize_question.dart';
@@ -82,6 +83,9 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Container(
+                child: null,
+              ),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -194,7 +198,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                       enabled: widget.question.isDone(),
                       onPressed: () {
                         widget.question.checkAnswer();
-                        Navigator.pop(context, widget.question);
+                        Navigator.pop(context, Result(widget.question));
                       },
                       text: 'Submit',
                     ),

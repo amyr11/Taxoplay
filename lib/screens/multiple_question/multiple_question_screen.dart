@@ -4,6 +4,7 @@ import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
+import 'package:taxoplay/models/result.dart';
 import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
 
 import '../../components/prize_question.dart';
@@ -113,7 +114,7 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
                     enabled: widget.question.isDone(),
                     onPressed: () {
                       widget.question.checkAnswer();
-                      Navigator.pop(context, widget.question);
+                      Navigator.pop(context, Result(widget.question));
                     },
                     text: 'Submit',
                   ),
