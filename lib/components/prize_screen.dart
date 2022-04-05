@@ -4,6 +4,7 @@ import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/models/category.dart';
 import 'package:taxoplay/models/result.dart';
+import 'package:taxoplay/screens/score.dart';
 
 import '../../helpers/dialogs.dart';
 
@@ -99,7 +100,15 @@ class PrizeScreenState<T extends PrizeScreen> extends State<T> {
                 ),
                 DefaultButton(
                   enabled: category.isComplete,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ScoreScreen(category.name, category.score()),
+                      ),
+                    );
+                  },
                   text: 'Show Score',
                 ),
               ],

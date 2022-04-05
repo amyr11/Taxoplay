@@ -18,22 +18,31 @@ class Category {
 
   void _checkComplete() {
     bool complete = true;
-
     questions.forEach((key, value) {
-      for (var element in value) {
-        if (!element.isAnswered) {
+      for (Question question in value) {
+        if (!question.isAnswered) {
           complete = false;
           break;
         }
       }
     });
-
     isComplete = complete;
   }
 
   void updateQuestion(String round, int index, Question updated) {
     questions[round]![index] = updated;
     _checkComplete();
+  }
+
+  int score() {
+    int score = 0;
+    questions.forEach((key, value) {
+      for (Question question in value) {
+        score += question.isCorrect ? question.price : 0;
+      }
+    });
+
+    return score;
   }
 }
 

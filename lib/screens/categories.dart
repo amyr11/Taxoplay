@@ -23,10 +23,7 @@ class CategoriesScreen extends StatelessWidget {
             vSpace(kDefaultSpace / 2),
             Text(
               'Pick a Category',
-              style: TextStyle(
-                fontSize: 24,
-                color: kSecondaryColor,
-              ),
+              style: k24RegularSecondary,
             ),
             vSpace(kDefaultSpace),
             buildCatButton(

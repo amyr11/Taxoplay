@@ -10,9 +10,20 @@ Color kDarkGreenColor = const Color.fromARGB(255, 22, 68, 46);
 Color kDarkRedColor = const Color.fromARGB(255, 68, 30, 22);
 Color kGreyedColor = const Color.fromARGB(255, 103, 108, 137);
 
+// Fonts
+TextStyle k24RegularSecondary = TextStyle(
+  fontSize: 24,
+  color: kSecondaryColor,
+);
+TextStyle k24RegularWhite = const TextStyle(
+  fontSize: 24,
+  color: Colors.white,
+);
+
 // Metrics
 double kDefaultSpace = 50.0;
 
+// Theme
 ThemeData kDarkTheme = ThemeData(
   brightness: Brightness.dark,
   fontFamily: 'Roboto',
