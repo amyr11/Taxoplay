@@ -80,7 +80,7 @@ class _QuestionTimerState extends State<QuestionTimer> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: kDefaultSpace / 2),
+      padding: EdgeInsets.symmetric(vertical: kDefaultSpace / 2, horizontal: kDefaultSpace / 2),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.end,

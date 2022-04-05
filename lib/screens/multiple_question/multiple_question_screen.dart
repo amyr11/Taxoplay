@@ -65,14 +65,11 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
         },
         child: Column(
           children: [
-            Expanded(
-              flex: widget.timed ? 1 : 0,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: widget.timed
-                    ? QuestionTimer(question: widget.question)
-                    : null,
-              ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: widget.timed
+                  ? QuestionTimer(question: widget.question)
+                  : null,
             ),
             Expanded(
               flex: 3,

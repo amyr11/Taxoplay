@@ -88,21 +88,16 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                flex: widget.timed ? 1 : 0,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: widget.timed
-                      ? QuestionTimer(question: widget.question)
-                      : null,
-                ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: widget.timed
+                    ? QuestionTimer(question: widget.question)
+                    : null,
               ),
               Expanded(
-                flex: widget.timed ? 3 : 1,
+                flex: widget.timed ? 5 : 1,
                 child: Column(
-                  mainAxisAlignment: widget.timed
-                      ? MainAxisAlignment.start
-                      : MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     PrizeAndQuestion(question: widget.question),
                     vSpace(kDefaultSpace),
@@ -154,7 +149,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                 ),
               ),
               Expanded(
-                flex: widget.timed ? 2 : 1,
+                flex: widget.timed ? 4 : 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
