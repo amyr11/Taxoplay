@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:taxoplay/components/buttons.dart';
@@ -10,6 +8,7 @@ import 'package:taxoplay/models/result.dart';
 import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
 
 import '../../components/prize_question.dart';
+import '../../components/question_timer.dart';
 import '../../helpers/dialogs.dart';
 
 class MultipleQuestionScreen extends StatefulWidget {
@@ -29,66 +28,10 @@ class MultipleQuestionScreen extends StatefulWidget {
 }
 
 class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
-  late Timer timer;
-  int seconds = 60;
-
-  late int _remainingMinute;
-  late int _remainingSeconds;
-
   void setAnswer(String? answer) {
     setState(() {
       widget.question.currentAnswer = answer;
     });
-  }
-
-  Future<dynamic> showDialogTimed() {
-    return customDialog(
-      context,
-      CoolAlertType.info,
-      title: 'Timed Question',
-      text: 'You only have 1 minute to answer this question.',
-      confirmBtnText: 'Proceed',
-      barrierDismissible: false,
-    );
-  }
-
-  void startTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        if (seconds > 0) {
-          seconds--;
-        } else {
-          stopTimer();
-        }
-        updateTimeString();
-      });
-    });
-  }
-
-  void stopTimer() {
-    timer.cancel();
-    widget.question.checkAnswer();
-    Navigator.pop(context, Result(widget.question, timeRanOut: true));
-  }
-
-  void updateTimeString() {
-    _remainingMinute = seconds ~/ 60;
-    _remainingSeconds = seconds - 60 * _remainingMinute;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
-      showDialogTimed().then((_) => startTimer());
-    });
-    updateTimeString();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    timer.cancel();
   }
 
   @override
@@ -127,10 +70,7 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: widget.timed
-                    ? CustomTimer(
-                        time:
-                            '${_remainingMinute.toString().padLeft(2, '0')}:${_remainingSeconds.toString().padLeft(2, '0')}',
-                      )
+                    ? QuestionTimer(question: widget.question)
                     : null,
               ),
             ),
@@ -199,41 +139,6 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CustomTimer extends StatelessWidget {
-  const CustomTimer({
-    Key? key,
-    required this.time,
-  }) : super(key: key);
-
-  final String time;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          vertical: kDefaultSpace / 2, horizontal: kDefaultSpace / 2),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: kPrimaryColor,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 35),
-              child: Text(
-                time,
-                style: const TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
