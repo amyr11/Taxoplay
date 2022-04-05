@@ -27,9 +27,36 @@ class MultipleQuestionScreen extends StatefulWidget {
 }
 
 class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
+  String remainingTime = '1:00';
+
   void setAnswer(String? answer) {
     setState(() {
       widget.question.currentAnswer = answer;
+    });
+  }
+
+  Future<dynamic> showDialogTimed() {
+    return customDialog(
+      context,
+      CoolAlertType.info,
+      title: 'Timed Question',
+      text: 'You only have 1 minute to answer this question.',
+      confirmBtnText: 'Proceed',
+      barrierDismissible: false,
+    );
+  }
+
+  void startTimer() {
+    setState(() {
+      remainingTime = '0:30';
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      showDialogTimed().then((_) => startTimer());
     });
   }
 
@@ -68,7 +95,7 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
               flex: widget.timed ? 1 : 0,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: widget.timed ? CustomTimer() : null,
+                child: widget.timed ? CustomTimer(time: remainingTime) : null,
               ),
             ),
             Expanded(
@@ -144,7 +171,10 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
 class CustomTimer extends StatelessWidget {
   const CustomTimer({
     Key? key,
+    required this.time,
   }) : super(key: key);
+
+  final String time;
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +192,7 @@ class CustomTimer extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 35),
               child: Text(
-                '1:00',
+                time,
                 style: const TextStyle(fontSize: 20),
               ),
             ),
