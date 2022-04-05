@@ -14,6 +14,21 @@ class Category {
     questions['average'] = average;
     questions['difficult'] = difficult;
   }
+
+  bool isComplete() {
+    bool complete = true;
+
+    questions.forEach((key, value) {
+      for (var element in value) {
+        if (!element.isAnswered) {
+          complete = false;
+          break;
+        }
+      }
+    });
+
+    return complete;
+  }
 }
 
 abstract class Question {
