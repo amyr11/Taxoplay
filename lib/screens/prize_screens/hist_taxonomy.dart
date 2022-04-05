@@ -173,32 +173,17 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
                         children: [
                           Expanded(
                             child: Column(
-                              children: [
-                                PrizeCard(question: category.easy[0]),
-                                PrizeCard(question: category.easy[1]),
-                                PrizeCard(question: category.easy[2]),
-                                PrizeCard(question: category.easy[3]),
-                              ],
+                              children: [buildRoundColumn('easy')],
                             ),
                           ),
                           Expanded(
                             child: Column(
-                              children: [
-                                PrizeCard(question: category.average[0]),
-                                PrizeCard(question: category.average[1]),
-                                PrizeCard(question: category.average[2]),
-                                PrizeCard(question: category.average[3]),
-                              ],
+                              children: [buildRoundColumn('average')],
                             ),
                           ),
                           Expanded(
                             child: Column(
-                              children: [
-                                PrizeCard(question: category.difficult[0]),
-                                PrizeCard(question: category.difficult[1]),
-                                PrizeCard(question: category.difficult[2]),
-                                PrizeCard(question: category.difficult[3]),
-                              ],
+                              children: [buildRoundColumn('difficult')],
                             ),
                           ),
                         ],
@@ -213,6 +198,14 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
         ),
       ),
     );
+  }
+
+  ListView buildRoundColumn(String round) {
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: category.questions[round]!.length,
+        itemBuilder: (context, index) =>
+            PrizeCard(question: category.questions[round]![index]));
   }
 }
 

@@ -6,11 +6,14 @@ import 'package:taxoplay/screens/puzzle/puzzle_screen.dart';
 
 class Category {
   final String name;
-  final List<Question> easy;
-  final List<Question> average;
-  final List<Question> difficult;
+  final Map<String, List<Question>> questions = {};
 
-  Category(this.name, this.easy, this.average, this.difficult);
+  Category(this.name, List<Question> easy, List<Question> average,
+      List<Question> difficult) {
+    questions['easy'] = easy;
+    questions['average'] = average;
+    questions['difficult'] = difficult;
+  }
 }
 
 abstract class Question {
@@ -144,24 +147,3 @@ class MultipleChoiceQuestion extends Question {
     return currentAnswer != null;
   }
 }
-
-/*
-- Category
-  - name // string
-  - easy // Array of Questions
-  - average // Array of Questions
-  - difficult // Array of Questions
-
-- Question
-  - price // int
-  - question // string
-  - answer // string
-  
-  - isCorrect(answer, correct) // bool method
-  - goToScreen() // abstract method
-
-  - PuzzleQuestion
-    - hints // Array of indices in answer to show
-  - MultipleChoiceQuestion
-    - choices // array of strings
-*/
