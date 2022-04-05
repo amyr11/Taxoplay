@@ -19,6 +19,15 @@ TextStyle k24RegularWhite = const TextStyle(
   fontSize: 24,
   color: Colors.white,
 );
+TextStyle k16RegularWhite = const TextStyle(
+  fontSize: 16,
+  color: Colors.white,
+);
+TextStyle k50BoldSecondary = TextStyle(
+  fontSize: 50,
+  color: kSecondaryColor,
+  fontWeight: FontWeight.bold,
+);
 
 // Metrics
 double kDefaultSpace = 50.0;

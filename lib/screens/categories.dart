@@ -56,7 +56,7 @@ class CategoriesScreen extends StatelessWidget {
       String text, BuildContext context, Widget destination) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: ((context) => destination),
