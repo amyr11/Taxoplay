@@ -39,8 +39,9 @@ class PuzzleQuestion extends Question {
   List<PuzzleChar> puzzleChars = [];
   List<String> puzzleChoices = [];
 
-  PuzzleQuestion(int price, String question, String answer, this.hints)
-      : super(price, question, answer) {
+  PuzzleQuestion(int price, String question, String answer, this.hints,
+      {bool timed = false})
+      : super(price, question, answer, timed: timed) {
     List<String> splitAnswer = answer.split('').toList();
     for (int i = 0; i < splitAnswer.length; i++) {
       bool isHint = hints.contains(i);
@@ -60,7 +61,8 @@ class PuzzleQuestion extends Question {
 
   @override
   Widget getScreen(String categoryName) {
-    return PuzzleScreen(categoryName: categoryName, question: this);
+    return PuzzleScreen(
+        categoryName: categoryName, question: this, timed: timed);
   }
 
   @override

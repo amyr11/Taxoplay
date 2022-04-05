@@ -1,6 +1,7 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:taxoplay/components/buttons.dart';
+import 'package:taxoplay/components/question_timer.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/dialogs.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
@@ -13,9 +14,13 @@ import '../../components/prize_question.dart';
 class PuzzleScreen extends StatefulWidget {
   final String categoryName;
   final PuzzleQuestion question;
+  final bool timed;
 
   const PuzzleScreen(
-      {Key? key, required this.categoryName, required this.question})
+      {Key? key,
+      required this.categoryName,
+      required this.question,
+      required this.timed})
       : super(key: key);
 
   @override
@@ -83,12 +88,21 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                child: null,
+              Expanded(
+                flex: widget.timed ? 1 : 0,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: widget.timed
+                      ? QuestionTimer(question: widget.question)
+                      : null,
+                ),
               ),
               Expanded(
+                flex: widget.timed ? 3 : 1,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: widget.timed
+                      ? MainAxisAlignment.start
+                      : MainAxisAlignment.center,
                   children: [
                     PrizeAndQuestion(question: widget.question),
                     vSpace(kDefaultSpace),
@@ -140,6 +154,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                 ),
               ),
               Expanded(
+                flex: widget.timed ? 3 : 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

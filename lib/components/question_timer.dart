@@ -22,7 +22,7 @@ class QuestionTimer extends StatefulWidget {
 
 class _QuestionTimerState extends State<QuestionTimer> {
   late Timer timer;
-  int seconds = 2;
+  int seconds = 30;
 
   late int _remainingMinute;
   late int _remainingSeconds;

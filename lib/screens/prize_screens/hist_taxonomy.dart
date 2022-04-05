@@ -99,12 +99,14 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
         'People who look for what one organism has in common with another and try to figure out the relationship between them',
         'TAXONOMISTS',
         [1, 4, 6, 9],
+        timed: true,
       ),
       PuzzleQuestion(
         600,
         'This category was not included in Linnaeus\' lineup',
         'PHYLUM',
         [0, 5],
+        timed: true,
       ),
     ],
   );
