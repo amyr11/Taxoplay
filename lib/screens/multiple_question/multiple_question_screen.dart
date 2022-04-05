@@ -102,10 +102,12 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
                               },
                             ),
                             hSpace(10),
-                            Text(
-                              widget.question.choices[index],
-                              style: const TextStyle(
-                                fontSize: 16,
+                            Flexible(
+                              child: Text(
+                                widget.question.choices[index],
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
                           ],
