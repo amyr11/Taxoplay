@@ -32,7 +32,7 @@ class _QuestionTimerState extends State<QuestionTimer> {
       context,
       CoolAlertType.info,
       title: 'Timed Question',
-      text: 'You only have 1 minute to answer this question.',
+      text: 'You only have $seconds seconds to answer this question.',
       confirmBtnText: 'Proceed',
       barrierDismissible: false,
     );
