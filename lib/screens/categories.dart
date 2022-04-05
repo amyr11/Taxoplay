@@ -39,14 +39,14 @@ class CategoriesScreen extends StatelessWidget {
             buildCatButton(
               'Genetics',
               context,
-              const HistTaxonomyScreen(),
+              const GeneticsScreen(),
             ),
             vSpace(kDefaultSpace / 2),
             // buildCatButton('Classification'),
             buildCatButton(
               'Classification',
               context,
-              const HistTaxonomyScreen(),
+              const ClassificationScreen(),
             ),
             vSpace(kDefaultSpace),
           ],
