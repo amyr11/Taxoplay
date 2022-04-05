@@ -5,11 +5,11 @@ import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
 import 'package:taxoplay/models/result.dart';
-import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
+import 'package:taxoplay/screens/categories_screens.dart';
 
-import '../../components/prize_question.dart';
-import '../../components/question_timer.dart';
-import '../../helpers/dialogs.dart';
+import '../components/prize_question.dart';
+import '../components/question_timer.dart';
+import '../helpers/dialogs.dart';
 
 class MultipleQuestionScreen extends StatefulWidget {
   final String categoryName;

@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:taxoplay/screens/multiple_question/multiple_question_screen.dart';
-import 'package:taxoplay/screens/puzzle/puzzle_screen.dart';
+import 'package:taxoplay/screens/multiple_question_screen.dart';
+import 'package:taxoplay/screens/puzzle_screen.dart';
 
 class Category {
   final String name;
