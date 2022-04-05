@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
-import 'package:taxoplay/screens/prize_screens/hist_taxonomy.dart';
+import 'package:taxoplay/screens/prize_screens/categories_screens.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);

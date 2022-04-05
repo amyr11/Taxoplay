@@ -1,12 +1,6 @@
-import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
-import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/components/prize_screen.dart';
-import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/models/category.dart';
-import 'package:taxoplay/models/result.dart';
-
-import '../../helpers/dialogs.dart';
 
 class HistTaxonomyScreen extends PrizeScreen {
   const HistTaxonomyScreen({Key? key}) : super(key: key);
@@ -18,7 +12,6 @@ class HistTaxonomyScreen extends PrizeScreen {
 class _HistTaxonomyScreenState extends PrizeScreenState<HistTaxonomyScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     category = Category(
       'History of Taxonomy',
