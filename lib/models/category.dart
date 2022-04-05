@@ -7,6 +7,7 @@ import 'package:taxoplay/screens/puzzle/puzzle_screen.dart';
 class Category {
   final String name;
   final Map<String, List<Question>> questions = {};
+  bool isComplete = false;
 
   Category(this.name, List<Question> easy, List<Question> average,
       List<Question> difficult) {
@@ -15,7 +16,7 @@ class Category {
     questions['difficult'] = difficult;
   }
 
-  bool isComplete() {
+  void _checkComplete() {
     bool complete = true;
 
     questions.forEach((key, value) {
@@ -27,7 +28,12 @@ class Category {
       }
     });
 
-    return complete;
+    isComplete = complete;
+  }
+
+  void updateQuestion(String round, int index, Question updated) {
+    questions[round]![index] = updated;
+    _checkComplete();
   }
 }
 

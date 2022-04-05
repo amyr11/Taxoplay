@@ -192,6 +192,7 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
                   ),
                 ),
                 DefaultButton(
+                  enabled: category.isComplete,
                   onPressed: () {},
                   text: 'Show Score',
                 ),
@@ -206,7 +207,7 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
   void updateQuestion(String round, int index, Question updatedQuestion) async {
     if (mounted) {
       setState(() {
-        category.questions[round]![index] = updatedQuestion;
+        category.updateQuestion(round, index, updatedQuestion);
       });
     }
   }
@@ -281,7 +282,6 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
                   duration: const Duration(milliseconds: 500)),
             ),
           );
-          ;
         });
   }
 
