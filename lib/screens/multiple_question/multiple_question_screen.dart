@@ -38,7 +38,7 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(categoryName),
+        title: Text(widget.categoryName),
       ),
       body: WillPopScope(
         onWillPop: () async {

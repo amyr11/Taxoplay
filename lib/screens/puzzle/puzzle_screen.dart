@@ -59,7 +59,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(categoryName),
+        title: Text(widget.categoryName),
       ),
       body: WillPopScope(
         onWillPop: () async {
