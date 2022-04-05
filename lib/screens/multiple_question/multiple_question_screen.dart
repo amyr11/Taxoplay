@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:taxoplay/components/buttons.dart';
@@ -27,7 +29,11 @@ class MultipleQuestionScreen extends StatefulWidget {
 }
 
 class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
-  String remainingTime = '1:00';
+  late Timer timer;
+  int seconds = 60;
+
+  late int _remainingMinute;
+  late int _remainingSeconds;
 
   void setAnswer(String? answer) {
     setState(() {
@@ -47,9 +53,27 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
   }
 
   void startTimer() {
-    setState(() {
-      remainingTime = '0:30';
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (seconds > 0) {
+          seconds--;
+        } else {
+          stopTimer();
+        }
+        updateTimeString();
+      });
     });
+  }
+
+  void stopTimer() {
+    timer.cancel();
+    widget.question.checkAnswer();
+    Navigator.pop(context, Result(widget.question, timeRanOut: true));
+  }
+
+  void updateTimeString() {
+    _remainingMinute = seconds ~/ 60;
+    _remainingSeconds = seconds - 60 * _remainingMinute;
   }
 
   @override
@@ -58,6 +82,13 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       showDialogTimed().then((_) => startTimer());
     });
+    updateTimeString();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer.cancel();
   }
 
   @override
@@ -95,7 +126,12 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
               flex: widget.timed ? 1 : 0,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: widget.timed ? CustomTimer(time: remainingTime) : null,
+                child: widget.timed
+                    ? CustomTimer(
+                        time:
+                            '${_remainingMinute.toString().padLeft(2, '0')}:${_remainingSeconds.toString().padLeft(2, '0')}',
+                      )
+                    : null,
               ),
             ),
             Expanded(
