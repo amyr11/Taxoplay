@@ -154,7 +154,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                 ),
               ),
               Expanded(
-                flex: widget.timed ? 3 : 1,
+                flex: widget.timed ? 2 : 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
