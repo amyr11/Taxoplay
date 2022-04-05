@@ -191,7 +191,10 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
                     ],
                   ),
                 ),
-                DefaultButton(onPressed: () {}, text: 'Show Score'),
+                DefaultButton(
+                  onPressed: () {},
+                  text: 'Show Score',
+                ),
               ],
             ),
           ),
@@ -243,6 +246,7 @@ class CategoryCard extends StatelessWidget {
   }
 }
 
+//ignore: must_be_immutable
 class PrizeCard extends StatefulWidget {
   Question question;
 
@@ -306,10 +310,12 @@ class _PrizeCardState extends State<PrizeCard> {
         onTap: !widget.question.isAnswered
             ? () async {
                 final Result result = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: ((context) =>
-                            widget.question.getScreen(categoryName))));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        widget.question.getScreen(categoryName),
+                  ),
+                );
                 updateQuestion(result.updatedQuestion);
                 showDialog(result.timeRanOut);
               }
