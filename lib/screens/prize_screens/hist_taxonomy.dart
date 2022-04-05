@@ -203,12 +203,108 @@ class _HistTaxonomyScreenState extends State<HistTaxonomyScreen> {
     );
   }
 
+  void updateQuestion(String round, int index, Question updatedQuestion) async {
+    if (mounted) {
+      setState(() {
+        category.questions[round]![index] = updatedQuestion;
+      });
+    }
+  }
+
+  void showDialog(Result result) async {
+    Question question = result.updatedQuestion;
+
+    if (mounted && question.isAnswered) {
+      CoolAlertType alertType;
+      String title;
+      String text;
+
+      if (question.isCorrect) {
+        alertType = CoolAlertType.success;
+        title = 'Correct';
+        text = '+\$${question.price}';
+      } else {
+        alertType = CoolAlertType.error;
+        title = result.timeRanOut ? 'Time\'s Up!' : 'Wrong';
+        text = 'The correct answer is \n"${question.answer}"';
+      }
+
+      await Future.delayed(const Duration(milliseconds: 500));
+      customDialog(
+        context,
+        alertType,
+        title: title,
+        text: text,
+        confirmBtnText: 'Proceed',
+        onConfirmBtnTap: () {
+          Navigator.pop(context);
+        },
+        barrierDismissible: false,
+      );
+    }
+  }
+
   ListView buildRoundColumn(String round) {
     return ListView.builder(
         shrinkWrap: true,
         itemCount: category.questions[round]!.length,
-        itemBuilder: (context, index) =>
-            PrizeCard(question: category.questions[round]![index]));
+        itemBuilder: (context, index) {
+          Question question = category.questions[round]![index];
+
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 7,
+              vertical: 7,
+            ),
+            child: InkWell(
+              onTap: !question.isAnswered
+                  ? () async {
+                      final Result result = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              question.getScreen(categoryName),
+                        ),
+                      );
+                      updateQuestion(round, index, result.updatedQuestion);
+                      showDialog(result);
+                    }
+                  : null,
+              child: AnimatedCrossFade(
+                  firstChild: buildPriceCard(question, Colors.transparent),
+                  secondChild: question.isCorrect
+                      ? buildPriceCard(question, kDarkGreenColor)
+                      : buildPriceCard(question, kDarkRedColor),
+                  crossFadeState: question.isAnswered
+                      ? CrossFadeState.showSecond
+                      : CrossFadeState.showFirst,
+                  duration: const Duration(milliseconds: 500)),
+            ),
+          );
+          ;
+        });
+  }
+
+  Container buildPriceCard(Question question, Color color) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: color,
+        border: Border.all(
+          width: 2,
+          color: kPrimaryLightColor,
+        ),
+      ),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: Text(
+            '\$${question.price}',
+            style: const TextStyle(fontSize: 20),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -239,116 +335,6 @@ class CategoryCard extends StatelessWidget {
               category,
               style: const TextStyle(fontSize: 20),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-//ignore: must_be_immutable
-class PrizeCard extends StatefulWidget {
-  Question question;
-
-  PrizeCard({
-    Key? key,
-    required this.question,
-  }) : super(key: key);
-
-  @override
-  State<PrizeCard> createState() => _PrizeCardState();
-}
-
-class _PrizeCardState extends State<PrizeCard> {
-  void updateQuestion(Question updatedQuestion) async {
-    if (mounted) {
-      setState(() {
-        widget.question = updatedQuestion;
-      });
-    }
-  }
-
-  void showDialog(bool timeRanOut) async {
-    if (mounted && widget.question.isAnswered) {
-      CoolAlertType alertType;
-      String title;
-      String text;
-
-      if (widget.question.isCorrect) {
-        alertType = CoolAlertType.success;
-        title = 'Correct';
-        text = '+\$${widget.question.price}';
-      } else {
-        alertType = CoolAlertType.error;
-        title = timeRanOut ? 'Time\'s Up!' : 'Wrong';
-        text = 'The correct answer is \n"${widget.question.answer}"';
-      }
-
-      await Future.delayed(const Duration(milliseconds: 500));
-      customDialog(
-        context,
-        alertType,
-        title: title,
-        text: text,
-        confirmBtnText: 'Proceed',
-        onConfirmBtnTap: () {
-          Navigator.pop(context);
-        },
-        barrierDismissible: false,
-      );
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 7,
-        vertical: 7,
-      ),
-      child: InkWell(
-        onTap: !widget.question.isAnswered
-            ? () async {
-                final Result result = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        widget.question.getScreen(categoryName),
-                  ),
-                );
-                updateQuestion(result.updatedQuestion);
-                showDialog(result.timeRanOut);
-              }
-            : null,
-        child: AnimatedCrossFade(
-            firstChild: buildPriceCard(Colors.transparent),
-            secondChild: widget.question.isCorrect
-                ? buildPriceCard(kDarkGreenColor)
-                : buildPriceCard(kDarkRedColor),
-            crossFadeState: widget.question.isAnswered
-                ? CrossFadeState.showSecond
-                : CrossFadeState.showFirst,
-            duration: const Duration(milliseconds: 500)),
-      ),
-    );
-  }
-
-  Container buildPriceCard(Color color) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: color,
-        border: Border.all(
-          width: 2,
-          color: kPrimaryLightColor,
-        ),
-      ),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          child: Text(
-            '\$${widget.question.price}',
-            style: const TextStyle(fontSize: 20),
           ),
         ),
       ),
