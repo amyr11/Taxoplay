@@ -35,10 +35,12 @@ TextStyle k50BoldSecondary = TextStyle(
 TextStyle k18BoldSecondary = TextStyle(
   fontSize: 18,
   color: kSecondaryColor,
+  fontWeight: FontWeight.bold,
 );
-TextStyle k12BoldPrimary = TextStyle(
+TextStyle k12BoldPrimaryLight = TextStyle(
   fontSize: 12,
-  color: kPrimaryColor,
+  color: kPrimaryLightColor,
+  fontWeight: FontWeight.bold,
 );
 
 // Metrics

@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/screens/home_screen.dart';
 
-void main() {
+import 'helpers/sp_helper.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SPHelper.sp.initSharedPreferences();
+
   runApp(MyApp());
 }
 

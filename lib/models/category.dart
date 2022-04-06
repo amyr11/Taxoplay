@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:taxoplay/helpers/sp_helper.dart';
 import 'package:taxoplay/screens/multiple_question_screen.dart';
 import 'package:taxoplay/screens/puzzle_screen.dart';
 
@@ -53,12 +54,11 @@ class Category {
   void _saveScore() async {
     assert(isComplete, _notCompleteError);
 
-    final prefs = await SharedPreferences.getInstance();
     int score = this.score();
-    int bestScore = prefs.getInt(name) ?? 0;
+    int bestScore = SPHelper.sp.getInt(name) ?? 0;
 
     if (score > bestScore) {
-      prefs.setInt(name, score);
+      SPHelper.sp.setInt(name, score);
     }
   }
 }
