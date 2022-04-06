@@ -27,6 +27,11 @@ flutter:
 
   assets:
     - assets/logo/logo.png
+    - assets/developers/francine.png
+    - assets/developers/irish.png
+    - assets/developers/mark.png
+    - assets/developers/rhenz.png
+    - assets/developers/trisha.png
   fonts:
     - family: Roboto
       fonts:
