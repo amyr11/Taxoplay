@@ -66,9 +66,9 @@ class Category {
   }
 
   static void resetBestScores() {
-    SPHelper.sp.delete(histTaxonomy);
-    SPHelper.sp.delete(genetics);
-    SPHelper.sp.delete(classification);
+    SPHelper.sp.empty(histTaxonomy);
+    SPHelper.sp.empty(genetics);
+    SPHelper.sp.empty(classification);
   }
 }
 

@@ -16,7 +16,7 @@ class SPHelper {
     return prefs!.getInt(key) ?? 0;
   }
 
-  Future<bool> delete(String key) async {
-    return await prefs!.remove(key);
+  Future<bool> empty(String key) async {
+    return await prefs!.setInt(key, 0);
   }
 }

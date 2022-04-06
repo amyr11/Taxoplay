@@ -7,18 +7,23 @@ import '../components/sidebar.dart';
 import '../helpers/sp_helper.dart';
 import '../models/category.dart';
 
-class StatsSceen extends StatelessWidget {
+class StatsSceen extends StatefulWidget {
   const StatsSceen({Key? key, required this.id}) : super(key: key);
 
   final int id;
 
+  @override
+  State<StatsSceen> createState() => _StatsSceenState();
+}
+
+class _StatsSceenState extends State<StatsSceen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Stats"),
       ),
-      drawer: SideBar(highlighted: id),
+      drawer: SideBar(highlighted: widget.id),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +96,10 @@ class StatsSceen extends StatelessWidget {
               child: Column(
                 children: [
                   DefaultButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Category.resetBestScores();
+                      setState(() {});
+                    },
                     text: 'Reset',
                   ),
                 ],
