@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/constants.dart';
 
 import '../components/sidebar.dart';
@@ -25,6 +26,7 @@ class StatsSceen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
+              flex: 4,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -87,6 +89,16 @@ class StatsSceen extends StatelessWidget {
                 ],
               ),
             ),
+            Expanded(
+              child: Column(
+                children: [
+                  DefaultButton(
+                    onPressed: () {},
+                    text: 'Reset',
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
