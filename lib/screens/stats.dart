@@ -1,9 +1,11 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/constants.dart';
 
 import '../components/sidebar.dart';
+import '../helpers/dialogs.dart';
 import '../helpers/sp_helper.dart';
 import '../models/category.dart';
 
@@ -97,8 +99,16 @@ class _StatsSceenState extends State<StatsSceen> {
                 children: [
                   DefaultButton(
                     onPressed: () {
-                      Category.resetBestScores();
-                      setState(() {});
+                      customDialog(
+                        context,
+                        CoolAlertType.confirm,
+                        text: 'This cannot be undone.',
+                        onConfirmBtnTap: () {
+                          Category.resetBestScores();
+                          setState(() {});
+                          Navigator.pop(context);
+                        },
+                      );
                     },
                     text: 'Reset',
                   ),

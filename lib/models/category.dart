@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:taxoplay/helpers/dialogs.dart';
 import 'package:taxoplay/helpers/sp_helper.dart';
 import 'package:taxoplay/screens/multiple_question_screen.dart';
 import 'package:taxoplay/screens/puzzle_screen.dart';
