@@ -17,29 +17,31 @@ class ScoreScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(categoryName),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(kDefaultSpace / 2),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'You Earned',
-                      style: k24RegularWhite,
-                    ),
-                    vSpace(kDefaultSpace / 2),
-                    Text(
-                      '\$$score',
-                      style: k50BoldSecondary,
-                    ),
-                  ],
-                ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'You Earned',
+                    style: k24RegularWhite,
+                  ),
+                  vSpace(kDefaultSpace / 2),
+                  Text(
+                    '\$$score',
+                    style: k50BoldSecondary,
+                  ),
+                ],
               ),
-              Flexible(
+            ),
+            Flexible(
+              flex: 2,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: kDefaultSpace),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -56,21 +58,22 @@ class ScoreScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Flexible(
-                child: DefaultButton(
-                  text: 'Play Again',
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CategoriesScreen(),
-                      ),
-                    );
-                  },
-                ),
-              )
-            ],
-          ),
+            ),
+            Flexible(
+              flex: 2,
+              child: DefaultButton(
+                text: 'Play Again',
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CategoriesScreen(),
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
         ),
       ),
     );

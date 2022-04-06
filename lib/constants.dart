@@ -19,6 +19,10 @@ TextStyle k24RegularWhite = const TextStyle(
   fontSize: 24,
   color: Colors.white,
 );
+TextStyle k18RegularWhite = const TextStyle(
+  fontSize: 18,
+  color: Colors.white,
+);
 TextStyle k16RegularWhite = const TextStyle(
   fontSize: 16,
   color: Colors.white,
@@ -27,6 +31,14 @@ TextStyle k50BoldSecondary = TextStyle(
   fontSize: 50,
   color: kSecondaryColor,
   fontWeight: FontWeight.bold,
+);
+TextStyle k18BoldSecondary = TextStyle(
+  fontSize: 18,
+  color: kSecondaryColor,
+);
+TextStyle k12BoldPrimary = TextStyle(
+  fontSize: 12,
+  color: kPrimaryColor,
 );
 
 // Metrics
