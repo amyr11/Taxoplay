@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/logo_with_text.dart';
 import '../components/sidebar.dart';
 
 class GameInfoScreen extends StatelessWidget {
@@ -13,6 +14,11 @@ class GameInfoScreen extends StatelessWidget {
         title: const Text("Game Info"),
       ),
       drawer: SideBar(highlighted: id),
+      body: const LogoWithText(
+        header: 'What is Taxoplay?',
+        body:
+            'TaxoPlay is a game that will guide you to the world of Taxonomy. This game is divided into three specific categories: History of Taxonomy, Genetics and Classifications.',
+      ),
     );
   }
 }
