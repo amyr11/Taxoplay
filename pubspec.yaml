@@ -13,6 +13,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  shared_preferences: ^2.0.13
   sidebarx: ^0.2.1+1
 
 dev_dependencies:
