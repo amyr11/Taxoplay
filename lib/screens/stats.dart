@@ -5,14 +5,12 @@ import 'package:taxoplay/constants.dart';
 
 import '../components/sidebar.dart';
 import '../helpers/sp_helper.dart';
+import '../models/category.dart';
 
 class StatsSceen extends StatelessWidget {
   const StatsSceen({Key? key, required this.id}) : super(key: key);
 
   final int id;
-  final String histTaxonomy = 'History of Taxonomy';
-  final String genetics = 'Genetics';
-  final String classification = 'Classification';
 
   @override
   Widget build(BuildContext context) {

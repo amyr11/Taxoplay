@@ -1,10 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxoplay/helpers/sp_helper.dart';
 import 'package:taxoplay/screens/multiple_question_screen.dart';
 import 'package:taxoplay/screens/puzzle_screen.dart';
+
+const String histTaxonomy = 'History of Taxonomy';
+const String genetics = 'Genetics';
+const String classification = 'Classification';
 
 class Category {
   final String name;
@@ -60,6 +63,12 @@ class Category {
     if (score > bestScore) {
       SPHelper.sp.setInt(name, score);
     }
+  }
+
+  static void resetBestScores() {
+    SPHelper.sp.delete(histTaxonomy);
+    SPHelper.sp.delete(genetics);
+    SPHelper.sp.delete(classification);
   }
 }
 

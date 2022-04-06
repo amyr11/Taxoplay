@@ -14,7 +14,7 @@ class _HistTaxonomyScreenState extends PrizeScreenState<HistTaxonomyScreen> {
   void initState() {
     super.initState();
     category = Category(
-      'History of Taxonomy',
+      histTaxonomy,
       [
         PuzzleQuestion(
           100,
@@ -121,7 +121,7 @@ class _GeneticsScreenState extends PrizeScreenState<GeneticsScreen> {
   void initState() {
     super.initState();
     category = Category(
-      'Genetics',
+      genetics,
       [
         PuzzleQuestion(
           100,
@@ -229,7 +229,7 @@ class _ClassificationScreenState
   void initState() {
     super.initState();
     category = Category(
-      'Classification',
+      classification,
       [
         PuzzleQuestion(
           100,
