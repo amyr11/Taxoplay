@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxoplay/screens/multiple_question_screen.dart';
 import 'package:taxoplay/screens/puzzle_screen.dart';
 
@@ -8,6 +9,8 @@ class Category {
   final String name;
   final Map<String, List<Question>> questions = {};
   bool isComplete = false;
+  final String _notCompleteError =
+      'The category was scored but was not finished yet.';
 
   Category(this.name, List<Question> easy, List<Question> average,
       List<Question> difficult) {
@@ -35,14 +38,27 @@ class Category {
   }
 
   int score() {
+    assert(isComplete, _notCompleteError);
+
     int score = 0;
     questions.forEach((key, value) {
       for (Question question in value) {
         score += question.isCorrect ? question.price : 0;
       }
     });
-
     return score;
+  }
+
+  void saveScore() async {
+    assert(isComplete, _notCompleteError);
+
+    final prefs = await SharedPreferences.getInstance();
+    int score = this.score();
+    int bestScore = prefs.getInt(name) ?? 0;
+
+    if (score > bestScore) {
+      prefs.setInt(name, score);
+    }
   }
 }
 
