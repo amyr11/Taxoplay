@@ -28,6 +28,7 @@ class LogoWithText extends StatelessWidget {
             Text(
               header,
               style: k24RegularSecondary,
+              textAlign: TextAlign.center,
             ),
             vSpace(kDefaultSpace / 4),
             Text(

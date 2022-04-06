@@ -17,6 +17,6 @@ List<Screen> screens = [
   Screen('Home', const HomeScreen(id: 0)),
   Screen('Stats', const StatsSceen(id: 1)),
   Screen('Game Info', const GameInfoScreen(id: 2)),
-  Screen('Game Instruction', const GameInstructionScreen(id: 3)),
+  Screen('Game Instruction', GameInstructionScreen(id: 3)),
   Screen('Developers', const DevelopersScreen(id: 4)),
 ];
