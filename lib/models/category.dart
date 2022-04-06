@@ -30,6 +30,7 @@ class Category {
       }
     });
     isComplete = complete;
+    if (isComplete) _saveScore();
   }
 
   void updateQuestion(String round, int index, Question updated) {
@@ -49,7 +50,7 @@ class Category {
     return score;
   }
 
-  void saveScore() async {
+  void _saveScore() async {
     assert(isComplete, _notCompleteError);
 
     final prefs = await SharedPreferences.getInstance();
