@@ -1,6 +1,5 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxoplay/components/buttons.dart';
 import 'package:taxoplay/constants.dart';
 
@@ -136,18 +135,16 @@ class StatRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Flexible(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: child1,
-            ),
-            Expanded(
-              child: child2,
-            ),
-          ],
-        ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: child1,
+          ),
+          Expanded(
+            child: child2,
+          ),
+        ],
       ),
     );
   }

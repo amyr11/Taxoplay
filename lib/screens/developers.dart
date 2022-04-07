@@ -76,13 +76,11 @@ class Developer extends StatelessWidget {
             vSpace(kDefaultSpace / 2),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: kDefaultSpace),
-              child: Flexible(
-                child: Text(
-                  name,
-                  style: k24RegularSecondary,
-                  maxLines: 2,
-                  textAlign: TextAlign.center,
-                ),
+              child: Text(
+                name,
+                style: k24RegularSecondary,
+                maxLines: 2,
+                textAlign: TextAlign.center,
               ),
             ),
           ],
