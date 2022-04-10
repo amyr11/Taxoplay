@@ -28,8 +28,8 @@ class Category {
         CategoryRound(name, Difficulty.difficult, difficult);
   }
 
-  CategoryRound? getRound(String difficulty) {
-    return _rounds[difficulty];
+  CategoryRound getRound(String difficulty) {
+    return _rounds[difficulty]!;
   }
 
   static void resetBestScores() {
