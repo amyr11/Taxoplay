@@ -62,7 +62,7 @@ class _StatsSceenState extends State<StatsSceen> {
                               style: k18RegularWhite,
                             ),
                             child2: Text(
-                              '\$${SPHelper.sp.getInt(histTaxonomy)}',
+                              '\$${Category.getStat(histTaxonomy)}',
                               style: k18BoldSecondary,
                             ),
                           ),
@@ -72,7 +72,7 @@ class _StatsSceenState extends State<StatsSceen> {
                               style: k18RegularWhite,
                             ),
                             child2: Text(
-                              '\$${SPHelper.sp.getInt(genetics)}',
+                              '\$${Category.getStat(genetics)}',
                               style: k18BoldSecondary,
                             ),
                           ),
@@ -82,7 +82,7 @@ class _StatsSceenState extends State<StatsSceen> {
                               style: k18RegularWhite,
                             ),
                             child2: Text(
-                              '\$${SPHelper.sp.getInt(classification)}',
+                              '\$${Category.getStat(classification)}',
                               style: k18BoldSecondary,
                             ),
                           ),

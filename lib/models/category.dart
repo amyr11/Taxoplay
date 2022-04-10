@@ -13,6 +13,16 @@ class Difficulty {
   static const String easy = 'Easy';
   static const String average = 'Average';
   static const String difficult = 'Difficult';
+
+  static void forEachDiff(Function(String difficulty) func) {
+    for (String difficulty in [
+      Difficulty.easy,
+      Difficulty.average,
+      Difficulty.difficult
+    ]) {
+      func(difficulty);
+    }
+  }
 }
 
 class Category {
@@ -33,9 +43,25 @@ class Category {
   }
 
   static void resetBestScores() {
-    SPHelper.sp.empty(histTaxonomy);
-    SPHelper.sp.empty(genetics);
-    SPHelper.sp.empty(classification);
+    Difficulty.forEachDiff((difficulty) {
+      forEachCat((categoryName) {
+        SPHelper.sp.setInt('$categoryName.$difficulty', 0);
+      });
+    });
+  }
+
+  static int getStat(String categoryName) {
+    int total = 0;
+    Difficulty.forEachDiff((difficulty) {
+      total += SPHelper.sp.getInt('$categoryName.$difficulty') ?? 0;
+    });
+    return total;
+  }
+
+  static void forEachCat(Function(String categoryName) func) {
+    for (String categoryName in [histTaxonomy, genetics, classification]) {
+      func(categoryName);
+    }
   }
 }
 
