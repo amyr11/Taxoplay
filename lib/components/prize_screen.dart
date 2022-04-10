@@ -23,9 +23,7 @@ class _PrizeScreenState extends State<PrizeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.categoryName),
-      ),
+      appBar: AppBar(),
       body: WillPopScope(
         onWillPop: () async {
           customDialog(
@@ -62,51 +60,39 @@ class _PrizeScreenState extends State<PrizeScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: kDefaultSpace,
-                    horizontal: kDefaultSpace / 8,
-                  ),
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 2,
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                    ),
-                    itemCount: widget.round.questions.length,
-                    itemBuilder: (context, i) {
-                      // To pivot the grid view
-                      int index = (4 * (i % 3)) + (i ~/ 3);
-                      Question question = widget.round.questions[index];
-
-                      return InkWell(
-                        onTap: !question.isAnswered
-                            ? () async {
-                                final Result result = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        question.getScreen(widget.categoryName),
-                                  ),
-                                );
-                                updateQuestion(index, result.updatedQuestion);
-                                showDialog(result);
-                              }
-                            : null,
-                        child: AnimatedCrossFade(
-                            firstChild:
-                                buildPriceCard(question, Colors.transparent),
-                            secondChild: question.isCorrect
-                                ? buildPriceCard(question, kDarkGreenColor)
-                                : buildPriceCard(question, kDarkRedColor),
-                            crossFadeState: question.isAnswered
-                                ? CrossFadeState.showSecond
-                                : CrossFadeState.showFirst,
-                            duration: const Duration(milliseconds: 500)),
-                      );
-                    },
+                  padding: EdgeInsets.symmetric(vertical: kDefaultSpace / 2),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                buildRoundColumn(
+                                    widget.round.questions.sublist(0, 4))
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                buildRoundColumn(
+                                    widget.round.questions.sublist(4, 8))
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                buildRoundColumn(
+                                    widget.round.questions.sublist(8, 12))
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
                 DefaultButton(
@@ -130,7 +116,7 @@ class _PrizeScreenState extends State<PrizeScreen> {
     );
   }
 
-  void updateQuestion(int index, Question updatedQuestion) {
+  void updateQuestion(int index, Question updatedQuestion) async {
     if (mounted) {
       setState(() {
         widget.round.updateQuestion(index, updatedQuestion);
@@ -171,45 +157,46 @@ class _PrizeScreenState extends State<PrizeScreen> {
     }
   }
 
-  // ListView buildRoundColumn(String round) {
-  //   return ListView.builder(
-  //       shrinkWrap: true,
-  //       itemCount: widget.round.questions.length,
-  //       itemBuilder: (context, index) {
-  //         Question question = widget.round.questions[index];
+  ListView buildRoundColumn(List<Question> questions) {
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: questions.length,
+        itemBuilder: (context, index) {
+          Question question = questions[index];
 
-  //         return Padding(
-  //           padding: const EdgeInsets.symmetric(
-  //             horizontal: 7,
-  //             vertical: 7,
-  //           ),
-  //           child: InkWell(
-  //             onTap: !question.isAnswered
-  //                 ? () async {
-  //                     final Result result = await Navigator.push(
-  //                       context,
-  //                       MaterialPageRoute(
-  //                         builder: (context) =>
-  //                             question.getScreen(widget.categoryName),
-  //                       ),
-  //                     );
-  //                     updateQuestion(round, index, result.updatedQuestion);
-  //                     showDialog(result);
-  //                   }
-  //                 : null,
-  //             child: AnimatedCrossFade(
-  //                 firstChild: buildPriceCard(question, Colors.transparent),
-  //                 secondChild: question.isCorrect
-  //                     ? buildPriceCard(question, kDarkGreenColor)
-  //                     : buildPriceCard(question, kDarkRedColor),
-  //                 crossFadeState: question.isAnswered
-  //                     ? CrossFadeState.showSecond
-  //                     : CrossFadeState.showFirst,
-  //                 duration: const Duration(milliseconds: 500)),
-  //           ),
-  //         );
-  //       });
-  // }
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 7,
+              vertical: 7,
+            ),
+            child: InkWell(
+              onTap: !question.isAnswered
+                  ? () async {
+                      final Result result = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              question.getScreen(widget.categoryName),
+                        ),
+                      );
+                      updateQuestion(widget.round.questions.indexOf(question),
+                          result.updatedQuestion);
+                      showDialog(result);
+                    }
+                  : null,
+              child: AnimatedCrossFade(
+                  firstChild: buildPriceCard(question, Colors.transparent),
+                  secondChild: question.isCorrect
+                      ? buildPriceCard(question, kDarkGreenColor)
+                      : buildPriceCard(question, kDarkRedColor),
+                  crossFadeState: question.isAnswered
+                      ? CrossFadeState.showSecond
+                      : CrossFadeState.showFirst,
+                  duration: const Duration(milliseconds: 500)),
+            ),
+          );
+        });
+  }
 
   Container buildPriceCard(Question question, Color color) {
     return Container(
@@ -223,7 +210,7 @@ class _PrizeScreenState extends State<PrizeScreen> {
       ),
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15),
+          padding: const EdgeInsets.symmetric(vertical: 20),
           child: Text(
             '\$${question.price}',
             style: const TextStyle(fontSize: 20),
