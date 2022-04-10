@@ -17,15 +17,19 @@ class Difficulty {
 
 class Category {
   final String name;
-  final Map<String, CategoryRound> rounds = {};
+  final Map<String, CategoryRound> _rounds = {};
 
   Category(this.name, List<Question> easy, List<Question> average,
       List<Question> difficult) {
-    rounds[Difficulty.easy] = CategoryRound(name, Difficulty.easy, easy);
-    rounds[Difficulty.average] =
+    _rounds[Difficulty.easy] = CategoryRound(name, Difficulty.easy, easy);
+    _rounds[Difficulty.average] =
         CategoryRound(name, Difficulty.average, average);
-    rounds[Difficulty.difficult] =
+    _rounds[Difficulty.difficult] =
         CategoryRound(name, Difficulty.difficult, difficult);
+  }
+
+  CategoryRound? getRound(String difficulty) {
+    return _rounds[difficulty];
   }
 
   static void resetBestScores() {
@@ -42,7 +46,7 @@ class CategoryRound {
   final List<Question> questions;
   bool isComplete = false;
   final String _notCompleteError =
-      'The category was scored but was not finished yet.';
+      'This round was scored but was not finished yet.';
 
   CategoryRound(this.categoryName, this.difficulty, this.questions) {
     spString = '$categoryName.$difficulty';
