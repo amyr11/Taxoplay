@@ -69,7 +69,7 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
                   : null,
             ),
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -116,7 +116,6 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
               ),
             ),
             Expanded(
-              flex: widget.question.timed ? 1 : 1,
               child: Column(
                 mainAxisAlignment: widget.question.timed
                     ? MainAxisAlignment.center
