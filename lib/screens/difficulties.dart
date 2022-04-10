@@ -5,8 +5,9 @@ import 'package:taxoplay/screens/categories_screens.dart';
 
 import '../models/category.dart';
 
-class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({Key? key, required this.category}) : super(key: key);
+class DifficultiesScreen extends StatelessWidget {
+  const DifficultiesScreen({Key? key, required this.category})
+      : super(key: key);
 
   final Category category;
 
