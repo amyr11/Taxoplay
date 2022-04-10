@@ -3,26 +3,56 @@ import 'package:taxoplay/models/category.dart';
 List<Question> easy = [
   PuzzleQuestion(
     100,
-    'Greek Philosopher who saw the hierarchy of organisms called the “Ladder of Nature"',
-    'ARISTOTLE',
-    [2, 4, 8],
+    "question",
+    "answer",
+    [1, 0],
   ),
-  PuzzleQuestion(
+  MultipleChoiceQuestion(
     100,
-    'One of the three major domains',
-    'EUKARYA',
-    [0, 2, 6],
+    "question",
+    "answer",
+    ["wrong1", "wrong2", "wrong3"],
   ),
-  PuzzleQuestion(
-    200,
-    'Animals with bony backbones',
-    'VERTEBRATES',
-    [0, 2, 6, 10],
+  MultipleChoiceQuestion(
+    100,
+    "question",
+    "answer",
+    ["wrong1", "wrong2"],
+    includeNone: true,
   ),
-  PuzzleQuestion(
-    200,
-    'Smallest category in the hierarchical classification of organisms',
-    'SPECIES',
-    [0, 1, 6],
+];
+
+List<Question> average = [
+  MultipleChoiceQuestion(
+    100,
+    "question",
+    "answer",
+    ["wrong1", "wrong2", "wrong3"],
+  ),
+  MultipleChoiceQuestion(
+    100,
+    "question",
+    "answer",
+    ["wrong1", "wrong2"],
+    includeNone: true,
+  ),
+];
+
+List<Question> difficult = [
+  PuzzleQuestion(100, "question", "answer", [1, 0], time: 60),
+  MultipleChoiceQuestion(
+    100,
+    "question",
+    "answer",
+    ["wrong1", "wrong2", "wrong3"],
+    time: 60,
+  ),
+  MultipleChoiceQuestion(
+    100,
+    "question",
+    "answer",
+    ["wrong1", "wrong2"],
+    includeNone: true,
+    time: 60,
   ),
 ];

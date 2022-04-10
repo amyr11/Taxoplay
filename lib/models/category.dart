@@ -78,9 +78,9 @@ abstract class Question {
   final String answer;
   bool isAnswered = false;
   bool isCorrect = false;
-  final bool timed;
+  final int time;
 
-  Question(this.price, this.question, this.answer, {this.timed = false});
+  Question(this.price, this.question, this.answer, {this.time = 0});
 
   Widget getScreen(String categoryName);
 
@@ -99,8 +99,8 @@ class PuzzleQuestion extends Question {
   List<String> puzzleChoices = [];
 
   PuzzleQuestion(int price, String question, String answer, this.hints,
-      {bool timed = false})
-      : super(price, question, answer, timed: timed) {
+      {int time = 0})
+      : super(price, question, answer) {
     List<String> splitAnswer = answer.split('').toList();
     for (int i = 0; i < splitAnswer.length; i++) {
       bool isHint = hints.contains(i);
@@ -121,7 +121,10 @@ class PuzzleQuestion extends Question {
   @override
   Widget getScreen(String categoryName) {
     return PuzzleScreen(
-        categoryName: categoryName, question: this, timed: timed);
+      categoryName: categoryName,
+      question: this,
+      time: time,
+    );
   }
 
   @override
@@ -172,8 +175,8 @@ class MultipleChoiceQuestion extends Question {
 
   MultipleChoiceQuestion(
       int price, String question, String answer, this.wrongAnswers,
-      {bool includeNone = false, bool timed = false})
-      : super(price, question, answer, timed: timed) {
+      {bool includeNone = false, int time = 0})
+      : super(price, question, answer) {
     _choices.add(answer);
     _choices.addAll(wrongAnswers);
     _choices.shuffle();
@@ -188,7 +191,7 @@ class MultipleChoiceQuestion extends Question {
     return MultipleQuestionScreen(
       categoryName: categoryName,
       question: this,
-      timed: timed,
+      time: time,
     );
   }
 

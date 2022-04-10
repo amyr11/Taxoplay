@@ -1,33 +1,32 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:taxoplay/components/buttons.dart';
+import 'package:taxoplay/components/timed.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
 import 'package:taxoplay/models/result.dart';
-import 'package:taxoplay/screens/categories_screens.dart';
 
 import '../components/prize_question.dart';
 import '../components/question_timer.dart';
 import '../helpers/dialogs.dart';
 
-class MultipleQuestionScreen extends StatefulWidget {
+class MultipleQuestionScreen extends Timed {
   final String categoryName;
   final MultipleChoiceQuestion question;
-  final bool timed;
 
-  const MultipleQuestionScreen(
-      {Key? key,
-      required this.categoryName,
-      required this.question,
-      this.timed = false})
-      : super(key: key);
+  const MultipleQuestionScreen({
+    Key? key,
+    required this.categoryName,
+    required this.question,
+    required int time,
+  }) : super(key: key, time: time);
 
   @override
-  State<MultipleQuestionScreen> createState() => _MultipleQuestionScreenState();
+  _MultipleQuestionScreenState createState() => _MultipleQuestionScreenState();
 }
 
-class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
+class _MultipleQuestionScreenState extends TimedState<MultipleQuestionScreen> {
   void setAnswer(String? answer) {
     setState(() {
       widget.question.currentAnswer = answer;
@@ -67,9 +66,7 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: widget.timed
-                  ? QuestionTimer(question: widget.question)
-                  : null,
+              child: timed ? QuestionTimer(question: widget.question) : null,
             ),
             Expanded(
               flex: 3,
@@ -119,11 +116,10 @@ class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
               ),
             ),
             Expanded(
-              flex: widget.timed ? 1 : 1,
+              flex: timed ? 1 : 1,
               child: Column(
-                mainAxisAlignment: widget.timed
-                    ? MainAxisAlignment.center
-                    : MainAxisAlignment.start,
+                mainAxisAlignment:
+                    timed ? MainAxisAlignment.center : MainAxisAlignment.start,
                 children: [
                   DefaultButton(
                     enabled: widget.question.isDone(),

@@ -77,7 +77,6 @@ class _HistTaxonomyScreenState extends PrizeScreenState<HistTaxonomyScreen> {
             'Trinomial system of nomenclature',
           ],
           includeNone: true,
-          timed: true,
         ),
         MultipleChoiceQuestion(
           500,
@@ -88,21 +87,18 @@ class _HistTaxonomyScreenState extends PrizeScreenState<HistTaxonomyScreen> {
             'New bacteria and alive bacteria',
             'True bacteria and dead bacteria'
           ],
-          timed: true,
         ),
         PuzzleQuestion(
           600,
           'People who look for what one organism has in common with another and try to figure out the relationship between them',
           'TAXONOMISTS',
           [1, 4, 6, 9],
-          timed: true,
         ),
         PuzzleQuestion(
           600,
           'This category was not included in Linnaeus\' lineup',
           'PHYLUM',
           [0, 5],
-          timed: true,
         ),
       ],
     );
@@ -184,7 +180,6 @@ class _GeneticsScreenState extends PrizeScreenState<GeneticsScreen> {
             'In metaphase',
             'In telophase',
           ],
-          timed: true,
         ),
         MultipleChoiceQuestion(
           500,
@@ -195,21 +190,18 @@ class _GeneticsScreenState extends PrizeScreenState<GeneticsScreen> {
             'Porifera Clade',
             'Protostomia Clade',
           ],
-          timed: true,
         ),
         PuzzleQuestion(
           600,
           'Animals characterized by their anuses forming before their mouth',
           'DEUTEROSTOMIA',
           [2, 5, 7, 10, 12],
-          timed: true,
         ),
         PuzzleQuestion(
           600,
           'Divided into two new clades, the laphotrochozoa and the Ecdysozoa',
           'PROTOSTOMES',
           [0, 5],
-          timed: true,
         ),
       ],
     );
@@ -288,28 +280,24 @@ class _ClassificationScreenState
           'What do chemoautotrophs use as a carbon source to oxidize molecules like ammonia (NH3) and hydrogen sulfide (H2S) for energy?',
           'Carbon dioxide',
           ['Glucose Carbon', 'Monoxide', 'Carbonate ion'],
-          timed: true,
         ),
         MultipleChoiceQuestion(
           500,
           'What is the repeating macromolecule made of amino acids and sugars that form an interconnecting web that gives bacterial cell walls structure and strength',
           'Peptidoglycan',
           ['Thermophilican', 'Crenarchaeotacan', 'Euryarchaeotacan'],
-          timed: true,
         ),
         PuzzleQuestion(
           600,
           'Microscopic organism found in all types of water',
           'CYANOBACTERIA',
           [0, 3, 7, 10, 12],
-          timed: true,
         ),
         PuzzleQuestion(
           600,
           'Use inorganic molecules to make organic molecules',
           'CHEMOAUTOTROPHS',
           [2, 4, 7, 10, 12],
-          timed: true,
         ),
       ],
     );
