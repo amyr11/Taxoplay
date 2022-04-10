@@ -9,9 +9,8 @@ import 'package:taxoplay/models/category.dart';
 import 'package:taxoplay/models/result.dart';
 
 import '../components/prize_question.dart';
-import '../components/timed.dart';
 
-class PuzzleScreen extends Timed {
+class PuzzleScreen extends StatefulWidget {
   final String categoryName;
   final PuzzleQuestion question;
 
@@ -19,14 +18,13 @@ class PuzzleScreen extends Timed {
     Key? key,
     required this.categoryName,
     required this.question,
-    required int time,
-  }) : super(key: key, time: time);
+  }) : super(key: key);
 
   @override
-  _PuzzleScreenState createState() => _PuzzleScreenState();
+  State<PuzzleScreen> createState() => _PuzzleScreenState();
 }
 
-class _PuzzleScreenState extends TimedState<PuzzleScreen> {
+class _PuzzleScreenState extends State<PuzzleScreen> {
   void addChar(int choiceIndex) {
     setState(() {
       // Find first index that has empty puzzleChar
@@ -56,6 +54,7 @@ class _PuzzleScreenState extends TimedState<PuzzleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("TIME: ${widget.question.timed}");
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.categoryName),
@@ -89,10 +88,12 @@ class _PuzzleScreenState extends TimedState<PuzzleScreen> {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: timed ? QuestionTimer(question: widget.question) : null,
+                child: widget.question.timed
+                    ? QuestionTimer(question: widget.question)
+                    : null,
               ),
               Expanded(
-                flex: timed ? 5 : 1,
+                flex: widget.question.timed ? 5 : 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -146,7 +147,7 @@ class _PuzzleScreenState extends TimedState<PuzzleScreen> {
                 ),
               ),
               Expanded(
-                flex: timed ? 4 : 1,
+                flex: widget.question.timed ? 4 : 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

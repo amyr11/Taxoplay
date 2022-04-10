@@ -1,7 +1,6 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:taxoplay/components/buttons.dart';
-import 'package:taxoplay/components/timed.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
 import 'package:taxoplay/models/category.dart';
@@ -11,7 +10,7 @@ import '../components/prize_question.dart';
 import '../components/question_timer.dart';
 import '../helpers/dialogs.dart';
 
-class MultipleQuestionScreen extends Timed {
+class MultipleQuestionScreen extends StatefulWidget {
   final String categoryName;
   final MultipleChoiceQuestion question;
 
@@ -19,14 +18,13 @@ class MultipleQuestionScreen extends Timed {
     Key? key,
     required this.categoryName,
     required this.question,
-    required int time,
-  }) : super(key: key, time: time);
+  }) : super(key: key);
 
   @override
-  _MultipleQuestionScreenState createState() => _MultipleQuestionScreenState();
+  State<MultipleQuestionScreen> createState() => _MultipleQuestionScreenState();
 }
 
-class _MultipleQuestionScreenState extends TimedState<MultipleQuestionScreen> {
+class _MultipleQuestionScreenState extends State<MultipleQuestionScreen> {
   void setAnswer(String? answer) {
     setState(() {
       widget.question.currentAnswer = answer;
@@ -66,7 +64,9 @@ class _MultipleQuestionScreenState extends TimedState<MultipleQuestionScreen> {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: timed ? QuestionTimer(question: widget.question) : null,
+              child: widget.question.timed
+                  ? QuestionTimer(question: widget.question)
+                  : null,
             ),
             Expanded(
               flex: 3,
@@ -116,10 +116,11 @@ class _MultipleQuestionScreenState extends TimedState<MultipleQuestionScreen> {
               ),
             ),
             Expanded(
-              flex: timed ? 1 : 1,
+              flex: widget.question.timed ? 1 : 1,
               child: Column(
-                mainAxisAlignment:
-                    timed ? MainAxisAlignment.center : MainAxisAlignment.start,
+                mainAxisAlignment: widget.question.timed
+                    ? MainAxisAlignment.center
+                    : MainAxisAlignment.start,
                 children: [
                   DefaultButton(
                     enabled: widget.question.isDone(),

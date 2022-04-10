@@ -98,8 +98,11 @@ abstract class Question {
   bool isAnswered = false;
   bool isCorrect = false;
   final int time;
+  late final bool timed;
 
-  Question(this.price, this.question, this.answer, {this.time = 0});
+  Question(this.price, this.question, this.answer, this.time) {
+    timed = time > 0;
+  }
 
   Widget getScreen(String categoryName);
 
@@ -119,7 +122,7 @@ class PuzzleQuestion extends Question {
 
   PuzzleQuestion(int price, String question, String answer, this.hints,
       {int time = 0})
-      : super(price, question, answer) {
+      : super(price, question, answer, time) {
     List<String> splitAnswer = answer.split('').toList();
     for (int i = 0; i < splitAnswer.length; i++) {
       bool isHint = hints.contains(i);
@@ -142,7 +145,6 @@ class PuzzleQuestion extends Question {
     return PuzzleScreen(
       categoryName: categoryName,
       question: this,
-      time: time,
     );
   }
 
@@ -195,7 +197,7 @@ class MultipleChoiceQuestion extends Question {
   MultipleChoiceQuestion(
       int price, String question, String answer, this.wrongAnswers,
       {bool includeNone = false, int time = 0})
-      : super(price, question, answer) {
+      : super(price, question, answer, time) {
     _choices.add(answer);
     _choices.addAll(wrongAnswers);
     _choices.shuffle();
@@ -210,7 +212,6 @@ class MultipleChoiceQuestion extends Question {
     return MultipleQuestionScreen(
       categoryName: categoryName,
       question: this,
-      time: time,
     );
   }
 

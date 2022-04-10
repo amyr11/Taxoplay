@@ -22,7 +22,7 @@ class QuestionTimer extends StatefulWidget {
 
 class _QuestionTimerState extends State<QuestionTimer> {
   late Timer timer;
-  int seconds = 30;
+  late int seconds = 30;
 
   late int _remainingMinute;
   late int _remainingSeconds;
@@ -65,6 +65,7 @@ class _QuestionTimerState extends State<QuestionTimer> {
   @override
   void initState() {
     super.initState();
+    seconds = widget.question.time;
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       showDialogTimed().then((_) => startTimer());
     });
@@ -80,7 +81,8 @@ class _QuestionTimerState extends State<QuestionTimer> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: kDefaultSpace / 2, horizontal: kDefaultSpace / 2),
+      padding: EdgeInsets.symmetric(
+          vertical: kDefaultSpace / 2, horizontal: kDefaultSpace / 2),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.end,
