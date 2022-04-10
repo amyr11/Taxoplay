@@ -9,36 +9,59 @@ const String histTaxonomy = 'History of Taxonomy';
 const String genetics = 'Genetics';
 const String classification = 'Classification';
 
+class Difficulty {
+  static const String easy = 'Easy';
+  static const String average = 'Average';
+  static const String difficult = 'Difficult';
+}
+
 class Category {
   final String name;
-  final Map<String, List<Question>> questions = {};
+  final Map<String, CategoryRound> rounds = {};
+
+  Category(this.name, List<Question> easy, List<Question> average,
+      List<Question> difficult) {
+    rounds[Difficulty.easy] = CategoryRound(name, Difficulty.easy, easy);
+    rounds[Difficulty.average] =
+        CategoryRound(name, Difficulty.average, average);
+    rounds[Difficulty.difficult] =
+        CategoryRound(name, Difficulty.difficult, difficult);
+  }
+
+  static void resetBestScores() {
+    SPHelper.sp.empty(histTaxonomy);
+    SPHelper.sp.empty(genetics);
+    SPHelper.sp.empty(classification);
+  }
+}
+
+class CategoryRound {
+  final String categoryName;
+  final String difficulty;
+  late final String spString;
+  final List<Question> questions;
   bool isComplete = false;
   final String _notCompleteError =
       'The category was scored but was not finished yet.';
 
-  Category(this.name, List<Question> easy, List<Question> average,
-      List<Question> difficult) {
-    questions['easy'] = easy;
-    questions['average'] = average;
-    questions['difficult'] = difficult;
+  CategoryRound(this.categoryName, this.difficulty, this.questions) {
+    spString = '$categoryName.$difficulty';
   }
 
   void _checkComplete() {
     bool complete = true;
-    questions.forEach((key, value) {
-      for (Question question in value) {
-        if (!question.isAnswered) {
-          complete = false;
-          break;
-        }
+    for (Question question in questions) {
+      if (!question.isAnswered) {
+        complete = false;
+        break;
       }
-    });
+    }
     isComplete = complete;
     if (isComplete) _saveScore();
   }
 
   void updateQuestion(String round, int index, Question updated) {
-    questions[round]![index] = updated;
+    questions[index] = updated;
     _checkComplete();
   }
 
@@ -46,11 +69,9 @@ class Category {
     assert(isComplete, _notCompleteError);
 
     int score = 0;
-    questions.forEach((key, value) {
-      for (Question question in value) {
-        score += question.isCorrect ? question.price : 0;
-      }
-    });
+    for (Question question in questions) {
+      score += question.isCorrect ? question.price : 0;
+    }
     return score;
   }
 
@@ -58,17 +79,11 @@ class Category {
     assert(isComplete, _notCompleteError);
 
     int score = this.score();
-    int bestScore = SPHelper.sp.getInt(name) ?? 0;
+    int bestScore = SPHelper.sp.getInt(spString) ?? 0;
 
     if (score > bestScore) {
-      SPHelper.sp.setInt(name, score);
+      SPHelper.sp.setInt(spString, score);
     }
-  }
-
-  static void resetBestScores() {
-    SPHelper.sp.empty(histTaxonomy);
-    SPHelper.sp.empty(genetics);
-    SPHelper.sp.empty(classification);
   }
 }
 
