@@ -76,7 +76,9 @@ class _PrizeScreenState extends State<PrizeScreen> {
                       mainAxisSpacing: 10,
                     ),
                     itemCount: widget.round.questions.length,
-                    itemBuilder: (context, index) {
+                    itemBuilder: (context, i) {
+                      // To pivot the grid view
+                      int index = (4 * (i % 3)) + (i ~/ 3);
                       Question question = widget.round.questions[index];
 
                       return InkWell(
