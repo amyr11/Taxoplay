@@ -64,7 +64,7 @@ class CategoryRound {
     if (isComplete) _saveScore();
   }
 
-  void updateQuestion(String round, int index, Question updated) {
+  void updateQuestion(int index, Question updated) {
     questions[index] = updated;
     _checkComplete();
   }

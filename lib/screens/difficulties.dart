@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:taxoplay/components/prize_screen.dart';
 import 'package:taxoplay/constants.dart';
 import 'package:taxoplay/helpers/empty_space.dart';
-import 'package:taxoplay/screens/categories_screens.dart';
+import 'package:taxoplay/screens/categories.dart';
 
 import '../models/category.dart';
 
@@ -13,51 +14,69 @@ class DifficultiesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(category.name),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Image(
-              height: 145,
-              image: AssetImage('assets/logo/logo.png'),
-            ),
-            vSpace(kDefaultSpace / 2),
-            Text(
-              'Choose Difficulty',
-              style: k24RegularSecondary,
-            ),
-            vSpace(kDefaultSpace),
-            buildCatButton(
-              'Easy',
-              context,
-              const HistTaxonomyScreen(),
-            ),
-            vSpace(kDefaultSpace / 2),
-            // buildCatButton('Genetics'),
-            buildCatButton(
-              'Average',
-              context,
-              const GeneticsScreen(),
-            ),
-            vSpace(kDefaultSpace / 2),
-            // buildCatButton('Classification'),
-            buildCatButton(
-              'Difficult',
-              context,
-              const ClassificationScreen(),
-            ),
-            vSpace(kDefaultSpace),
-          ],
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: ((context) => const CategoriesScreen())));
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(category.name),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Image(
+                height: 145,
+                image: AssetImage('assets/logo/logo.png'),
+              ),
+              vSpace(kDefaultSpace / 2),
+              Text(
+                'Choose Difficulty',
+                style: k24RegularSecondary,
+              ),
+              vSpace(kDefaultSpace),
+              buildDiffButton(
+                'Easy',
+                context,
+                PrizeScreen(
+                  categoryName: category.name,
+                  round: category.getRound(Difficulty.easy),
+                ),
+              ),
+              vSpace(kDefaultSpace / 2),
+              // buildCatButton('Genetics'),
+              buildDiffButton(
+                'Average',
+                context,
+                PrizeScreen(
+                  categoryName: category.name,
+                  round: category.getRound(Difficulty.average),
+                ),
+              ),
+              vSpace(kDefaultSpace / 2),
+              // buildCatButton('Classification'),
+              buildDiffButton(
+                'Difficult',
+                context,
+                PrizeScreen(
+                  categoryName: category.name,
+                  round: category.getRound(Difficulty.difficult),
+                ),
+              ),
+              vSpace(kDefaultSpace),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  ElevatedButton buildCatButton(
+  ElevatedButton buildDiffButton(
       String text, BuildContext context, Widget destination) {
     return ElevatedButton(
       onPressed: () {
