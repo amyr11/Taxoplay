@@ -22,17 +22,17 @@ class GameInstructionScreen extends StatelessWidget {
     const LogoWithText(
       header: 'Easy Round',
       body:
-          "A combination of multiple-choice questions and a word puzzle will appear per price. The player's goal is to figure out the word and answer each question. The aim of completing the puzzle is to find the word using a hint and a set of letters provided below the puzzle.",
+          "A combination of multiple-choice questions and a word puzzle will appear per prize. The player's goal is to figure out the word and answer each question. The aim of completing the puzzle is to find the word using a hint and a set of letters provided below the puzzle.",
     ),
     const LogoWithText(
       header: 'Average Round',
       body:
-          "Random questions will appear per price. The player’s goal is to figure out the correct answer among the four choices available for the specific question.",
+          "Random questions will appear per prize. The player’s goal is to figure out the correct answer among the four choices available for the specific question.",
     ),
     const LogoWithText(
       header: 'Difficult Round',
       body:
-          "A combination of multiple-choice questions and a word puzzle will emerge per price and with a time limit decreasing as the price increases. The player aims to figure out the correct answer or word before their time stops.",
+          "A combination of multiple-choice questions and a word puzzle will emerge per prize and with a time limit decreasing as the prize increases. The player aims to figure out the correct answer or word before their time stops.",
     ),
   ];
 
