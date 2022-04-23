@@ -27,7 +27,7 @@ class DevelopersScreen extends StatelessWidget {
     ),
     const Developer(
       imagePath: 'assets/developers/trisha.png',
-      name: 'Trisha Anjela P. Padila',
+      name: 'Trisha Anjela P. Padilla',
     ),
   ];
 
